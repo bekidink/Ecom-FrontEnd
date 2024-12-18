@@ -58,7 +58,7 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
 
       return filterData ? true : null;
     });
-    const url = `/${valideURLConvert(name)}-${id}/${valideURLConvert(
+    const url = `/category/${valideURLConvert(name)}-${id}_${valideURLConvert(
       subcategory?.name
     )}-${subcategory?._id}`;
 
@@ -66,6 +66,7 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
   };
 
   const redirectURL = handleRedirectProductListpage();
+  if(data.length===0) return null
   return (
     <div>
       <div className="container mx-auto p-4 flex items-center justify-between gap-4">

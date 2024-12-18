@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useRef, useState } from "react";
 import SummaryApi from "@/utils/summaryApi";
 import Axios from "@/utils/Axios";
@@ -5,9 +6,9 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import { DisplayPriceInRupees } from "@/utils/DisplayPriceInDolar";
 import Divider from "@/components/custom/Divider";
-import image1 from "../assets/minute_delivery.png";
-import image2 from "../assets/Best_Prices_Offers.png";
-import image3 from "../assets/Wide_Assortment.png";
+import image1 from "@/assets/minute_delivery.png";
+import image2 from "@/assets/Best_Prices_Offers.png";
+import image3 from "@/assets/Wide_Assortment.png";
 import { pricewithDiscount } from "@/utils/PriceWithDiscount";
 import AddToCartButton from "@/components/custom/AddToCartButton";
 import { useSearchParams } from "next/navigation";
@@ -174,7 +175,11 @@ const ProductDisplayPage = ({ params }: any) => {
         <h2 className="font-semibold">Why shop from binkeyit? </h2>
         <div>
           <div className="flex  items-center gap-4 my-4">
-            <img src={image1} alt="superfast delivery" className="w-20 h-20" />
+            <img
+              src={"/minute_delivery.png"}
+              alt="superfast delivery"
+              className="w-20 h-20"
+            />
             <div className="text-sm">
               <div className="font-semibold">Superfast Delivery</div>
               <p>
@@ -184,7 +189,11 @@ const ProductDisplayPage = ({ params }: any) => {
             </div>
           </div>
           <div className="flex  items-center gap-4 my-4">
-            <img src={image2} alt="Best prices offers" className="w-20 h-20" />
+            <img
+              src={"/Best_Prices_Offers.png"}
+              alt="Best prices offers"
+              className="w-20 h-20"
+            />
             <div className="text-sm">
               <div className="font-semibold">Best Prices & Offers</div>
               <p>
@@ -194,7 +203,11 @@ const ProductDisplayPage = ({ params }: any) => {
             </div>
           </div>
           <div className="flex  items-center gap-4 my-4">
-            <img src={image3} alt="Wide Assortment" className="w-20 h-20" />
+            <img
+              src={"/Wide_Assortment.png"}
+              alt="Wide Assortment"
+              className="w-20 h-20"
+            />
             <div className="text-sm">
               <div className="font-semibold">Wide Assortment</div>
               <p>

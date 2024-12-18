@@ -1,4 +1,4 @@
-export const baseURL = "http://localhost:8000";
+export const baseURL = process.env.URL || "https://ecom-backend-3-0ne5.onrender.com/";
 
 const SummaryApi = {
   register: {

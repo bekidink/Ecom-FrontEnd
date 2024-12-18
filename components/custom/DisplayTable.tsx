@@ -5,51 +5,75 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"; // Ensure you have ShadCN's table components imported correctly
 
-const DisplayTable = ({ data, column }:{data:any,column:any}) => {
+interface DisplayTableProps<T extends object> {
+  data: T[];
+  columns: any; // Use `ColumnDef<T, any>[]` for better typing
+  caption?: string; // Optional caption for the table
+}
+
+const DisplayTable = <T extends object>({
+  data,
+  columns,
+  caption,
+}: DisplayTableProps<T>) => {
   const table = useReactTable({
     data,
-    columns: column,
+    columns,
     getCoreRowModel: getCoreRowModel(),
   });
 
   return (
-    <div className="p-2">
-      <table className="w-full py-0 px-0 border-collapse">
-        <thead className="bg-black text-white">
+    <div className="p-4">
+      <Table>
+        {caption && <TableCaption>{caption}</TableCaption>}
+        <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              <th>Sr.No</th>
+            <TableRow key={headerGroup.id}>
+              <TableHead className="w-[50px]">#</TableHead>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="border whitespace-nowrap">
+                <TableHead key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
-                </th>
+                </TableHead>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row, index) => (
-            <tr key={row.id}>
-              <td className="border px-2 py-1 ">{index + 1}</td>
-              {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
-                  className="border px-2 py-1 whitespace-nowrap "
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="h-4" />
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.length > 0 ? (
+            table.getRowModel().rows.map((row, index) => (
+              <TableRow key={row.id}>
+                <TableCell className="text-center">{index + 1}</TableCell>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length + 1} className="text-center">
+                No data available
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 };

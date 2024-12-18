@@ -12,6 +12,7 @@ import SummaryApi from "@/utils/summaryApi";
 import AxiosToastError from "@/utils/AxiosToastError";
 import successAlert from "@/utils/SuccessAlert";
 import { useEffect } from "react";
+import { Button } from "../ui/button";
 
 const EditProductAdmin = ({ close, data: propsData, fetchProductData }:{
     close:any,data:any,fetchProductData:any
@@ -435,10 +436,11 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }:{
               >
                 Add Fields
               </div>
-
-              <button className="bg-primary-100 hover:bg-primary-200 py-2 rounded font-semibold">
-                Update Product
-              </button>
+              <div className="flex items-center justify-center">
+                <Button className=" hover:bg-primary-200 py-2 rounded font-semibold">
+                  Update Product
+                </Button>
+              </div>
             </form>
           </div>
 

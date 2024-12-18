@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from "@/provider/GlobalProvider";
@@ -9,16 +10,17 @@ import { pricewithDiscount } from "@/utils/PriceWithDiscount";
 import imageEmpty from "@/assets/empty_cart.webp";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const DisplayCartItem = ({ close }) => {
   const { notDiscountTotalPrice, totalPrice, totalQty } = useGlobalContext();
   const cartItem = useSelector((state) => state.cartItem.cart);
   const user = useSelector((state) => state.user);
 //   const navigate = useNavigate();
-
+const router=useRouter()
   const redirectToCheckoutPage = () => {
     if (user?._id) {
-    //   navigate("/checkout");
+      router.push("/checkout");
       if (close) {
         close();
       }

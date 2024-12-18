@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import uploadImage from "@/utils/UploadImage";
@@ -12,6 +13,7 @@ import SummaryApi from "@/utils/summaryApi";
 import AxiosToastError from "@/utils/AxiosToastError";
 import successAlert from "@/utils/SuccessAlert";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 const UploadProduct = () => {
   const [data, setData] = useState({
@@ -231,192 +233,196 @@ const UploadProduct = () => {
               </div>
             </div>
           </div>
-          <div className="grid gap-1">
-            <label className="font-medium">Category</label>
-            <div>
-              <select
-                className="bg-blue-50 border w-full p-2 rounded"
-                value={selectCategory}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  const category = allCategory.find((el) => el._id === value);
-
-                  setData((preve) => {
-                    return {
-                      ...preve,
-                      category: [...preve.category, category],
-                    };
-                  });
-                  setSelectCategory("");
-                }}
-              >
-                <option value={""}>Select Category</option>
-                {allCategory.map((c, index) => {
-                  return <option value={c?._id}>{c.name}</option>;
-                })}
-              </select>
-              <div className="flex flex-wrap gap-3">
-                {data.category.map((c, index) => {
-                  return (
-                    <div
-                      key={c._id + index + "productsection"}
-                      className="text-sm flex items-center gap-1 bg-blue-50 mt-2"
-                    >
-                      <p>{c.name}</p>
-                      <div
-                        className="hover:text-red-500 cursor-pointer"
-                        onClick={() => handleRemoveCategory(index)}
-                      >
-                        <IoClose size={20} />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-          <div className="grid gap-1">
-            <label className="font-medium">Sub Category</label>
-            <div>
-              <select
-                className="bg-blue-50 border w-full p-2 rounded"
-                value={selectSubCategory}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  const subCategory = allSubCategory.find(
-                    (el) => el._id === value
-                  );
-
-                  setData((preve) => {
-                    return {
-                      ...preve,
-                      subCategory: [...preve.subCategory, subCategory],
-                    };
-                  });
-                  setSelectSubCategory("");
-                }}
-              >
-                <option value={""} className="text-neutral-600">
-                  Select Sub Category
-                </option>
-                {allSubCategory.map((c, index) => {
-                  return <option value={c?._id}>{c.name}</option>;
-                })}
-              </select>
-              <div className="flex flex-wrap gap-3">
-                {data.subCategory.map((c, index) => {
-                  return (
-                    <div
-                      key={c._id + index + "productsection"}
-                      className="text-sm flex items-center gap-1 bg-blue-50 mt-2"
-                    >
-                      <p>{c.name}</p>
-                      <div
-                        className="hover:text-red-500 cursor-pointer"
-                        onClick={() => handleRemoveSubCategory(index)}
-                      >
-                        <IoClose size={20} />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          <div className="grid gap-1">
-            <label htmlFor="unit" className="font-medium">
-              Unit
-            </label>
-            <input
-              id="unit"
-              type="text"
-              placeholder="Enter product unit"
-              name="unit"
-              value={data.unit}
-              onChange={handleChange}
-              required
-              className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
-            />
-          </div>
-
-          <div className="grid gap-1">
-            <label htmlFor="stock" className="font-medium">
-              Number of Stock
-            </label>
-            <input
-              id="stock"
-              type="number"
-              placeholder="Enter product stock"
-              name="stock"
-              value={data.stock}
-              onChange={handleChange}
-              required
-              className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
-            />
-          </div>
-
-          <div className="grid gap-1">
-            <label htmlFor="price" className="font-medium">
-              Price
-            </label>
-            <input
-              id="price"
-              type="number"
-              placeholder="Enter product price"
-              name="price"
-              value={data.price}
-              onChange={handleChange}
-              required
-              className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
-            />
-          </div>
-
-          <div className="grid gap-1">
-            <label htmlFor="discount" className="font-medium">
-              Discount
-            </label>
-            <input
-              id="discount"
-              type="number"
-              placeholder="Enter product discount"
-              name="discount"
-              value={data.discount}
-              onChange={handleChange}
-              required
-              className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
-            />
-          </div>
-
-          {/**add more field**/}
-          {Object?.keys(data?.more_details)?.map((k, index) => {
-            return (
-              <div className="grid gap-1">
-                <label htmlFor={k} className="font-medium">
-                  {k}
-                </label>
-                <input
-                  id={k}
-                  type="text"
-                  value={data?.more_details[k]}
+          <div className="grid grid-cols-2 items-center gap-4">
+            <div className="grid gap-1">
+              <label className="font-medium">Category</label>
+              <div>
+                <select
+                  className="bg-blue-50 border w-full p-2 rounded"
+                  value={selectCategory}
                   onChange={(e) => {
                     const value = e.target.value;
+                    const category = allCategory.find((el) => el._id === value);
+
                     setData((preve) => {
                       return {
                         ...preve,
-                        more_details: {
-                          ...preve.more_details,
-                          [k]: value,
-                        },
+                        category: [...preve.category, category],
                       };
                     });
+                    setSelectCategory("");
                   }}
-                  required
-                  className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
-                />
+                >
+                  <option value={""}>Select Category</option>
+                  {allCategory.map((c, index) => {
+                    return <option value={c?._id}>{c.name}</option>;
+                  })}
+                </select>
+                <div className="flex flex-wrap gap-3">
+                  {data.category.map((c, index) => {
+                    return (
+                      <div
+                        key={c._id + index + "productsection"}
+                        className="text-sm flex items-center gap-1 bg-blue-50 mt-2"
+                      >
+                        <p>{c.name}</p>
+                        <div
+                          className="hover:text-red-500 cursor-pointer"
+                          onClick={() => handleRemoveCategory(index)}
+                        >
+                          <IoClose size={20} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            );
-          })}
+            </div>
+            <div className="grid gap-1">
+              <label className="font-medium">Sub Category</label>
+              <div>
+                <select
+                  className="bg-blue-50 border w-full p-2 rounded"
+                  value={selectSubCategory}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const subCategory = allSubCategory.find(
+                      (el) => el._id === value
+                    );
+
+                    setData((preve) => {
+                      return {
+                        ...preve,
+                        subCategory: [...preve.subCategory, subCategory],
+                      };
+                    });
+                    setSelectSubCategory("");
+                  }}
+                >
+                  <option value={""} className="text-neutral-600">
+                    Select Sub Category
+                  </option>
+                  {allSubCategory.map((c, index) => {
+                    return <option value={c?._id}>{c.name}</option>;
+                  })}
+                </select>
+                <div className="flex flex-wrap gap-3">
+                  {data.subCategory.map((c, index) => {
+                    return (
+                      <div
+                        key={c._id + index + "productsection"}
+                        className="text-sm flex items-center gap-1 bg-blue-50 mt-2"
+                      >
+                        <p>{c.name}</p>
+                        <div
+                          className="hover:text-red-500 cursor-pointer"
+                          onClick={() => handleRemoveSubCategory(index)}
+                        >
+                          <IoClose size={20} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-4 gap-4">
+            <div className="grid gap-1">
+              <label htmlFor="unit" className="font-medium">
+                Unit
+              </label>
+              <input
+                id="unit"
+                type="text"
+                placeholder="Enter product unit"
+                name="unit"
+                value={data.unit}
+                onChange={handleChange}
+                required
+                className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+              />
+            </div>
+
+            <div className="grid gap-1">
+              <label htmlFor="stock" className="font-medium">
+                Number of Stock
+              </label>
+              <input
+                id="stock"
+                type="number"
+                placeholder="Enter product stock"
+                name="stock"
+                value={data.stock}
+                onChange={handleChange}
+                required
+                className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+              />
+            </div>
+
+            <div className="grid gap-1">
+              <label htmlFor="price" className="font-medium">
+                Price
+              </label>
+              <input
+                id="price"
+                type="number"
+                placeholder="Enter product price"
+                name="price"
+                value={data.price}
+                onChange={handleChange}
+                required
+                className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+              />
+            </div>
+            <div className="grid gap-1">
+              <label htmlFor="discount" className="font-medium">
+                Discount
+              </label>
+              <input
+                id="discount"
+                type="number"
+                placeholder="Enter product discount"
+                name="discount"
+                value={data.discount}
+                onChange={handleChange}
+                required
+                className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+              />
+            </div>
+          </div>
+
+          {/**add more field**/}
+          <div className="grid grid-cols-4 gap-4">
+            {Object?.keys(data?.more_details)?.map((k, index) => {
+              return (
+                <div className="grid gap-1">
+                  <label htmlFor={k} className="font-medium">
+                    {k}
+                  </label>
+                  <input
+                    id={k}
+                    type="text"
+                    value={data?.more_details[k]}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setData((preve) => {
+                        return {
+                          ...preve,
+                          more_details: {
+                            ...preve.more_details,
+                            [k]: value,
+                          },
+                        };
+                      });
+                    }}
+                    required
+                    className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+                  />
+                </div>
+              );
+            })}
+          </div>
 
           <div
             onClick={() => setOpenAddField(true)}
@@ -424,10 +430,11 @@ const UploadProduct = () => {
           >
             Add Fields
           </div>
-
-          <button className="bg-primary-100 hover:bg-primary-200 py-2 rounded font-semibold">
-            Submit
-          </button>
+          <div className="flex justify-center items-center">
+            <Button className=" justify-center hover:bg-primary-200 px-3 py-2 rounded font-semibold">
+              Submit
+            </Button>
+          </div>
         </form>
       </div>
 

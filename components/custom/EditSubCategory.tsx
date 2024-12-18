@@ -6,6 +6,7 @@ import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
 import toast from "react-hot-toast";
 import AxiosToastError from "@/utils/AxiosToastError";
+import { Button } from "../ui/button";
 
 const EditSubCategory = ({ close, data, fetchData }:{close:any,data:any,fetchData:any}) => {
   const [subCategoryData, setSubCategoryData] = useState({
@@ -85,7 +86,7 @@ const EditSubCategory = ({ close, data, fetchData }:{close:any,data:any,fetchDat
 
   return (
     <section className="fixed top-0 right-0 bottom-0 left-0 bg-neutral-800 bg-opacity-70 z-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-5xl bg-white p-4 rounded">
+      <div className="w-full max-w-2xl bg-white p-4 rounded-lg">
         <div className="flex items-center justify-between gap-3">
           <h1 className="font-semibold">Edit Sub Category</h1>
           <button onClick={close}>
@@ -184,21 +185,22 @@ const EditSubCategory = ({ close, data, fetchData }:{close:any,data:any,fetchDat
               </select>
             </div>
           </div>
-
-          <button
-            className={`px-4 py-2 border
+          <div className="flex justify-center">
+            <Button
+              className={`px-4 py-2 border
                             ${
                               subCategoryData?.name &&
                               subCategoryData?.image &&
                               subCategoryData?.category[0]
-                                ? "bg-primary-200 hover:bg-primary-100"
+                                ? " hover:bg-primary-100"
                                 : "bg-gray-200"
                             }    
                             font-semibold
                         `}
-          >
-            Submit
-          </button>
+            >
+              Submit
+            </Button>
+          </div>
         </form>
       </div>
     </section>

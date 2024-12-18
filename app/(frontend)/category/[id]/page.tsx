@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
@@ -7,7 +8,8 @@ import CardProduct from "@/components/custom/CardProduct";
 import { useSelector } from "react-redux";
 import { valideURLConvert } from "@/utils/valideURLConvert";
 import Link from "next/link";
-
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 const ProductListPage = ({ params: { id } }: { params: { id: string } }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -17,14 +19,18 @@ const ProductListPage = ({ params: { id } }: { params: { id: string } }) => {
   const [DisplaySubCatory, setDisplaySubCategory] = useState([]);
 
   console.log(AllSubCategory);
-
-  const subCategory = id.split("-");
+  
+  const CategoryParms = id.split("_");
+  const categoryParams = CategoryParms[0]
+  const subCategoryParams = CategoryParms[1];
+  console.log("category",CategoryParms);
+  const subCategory=CategoryParms[1].split("-")
   const subCategoryName = subCategory
     ?.slice(0, subCategory?.length - 1)
     ?.join(" ");
 
-  const categoryId = id.split("-").slice(-1)[0];
-  const subCategoryId = id.split("-").slice(-1)[0];
+  const categoryId = categoryParams.split("-").slice(-1)[0];
+  const subCategoryId = subCategoryParams.split("-").slice(-1)[0];
 
   const fetchProductdata = async () => {
     try {
@@ -75,11 +81,11 @@ const ProductListPage = ({ params: { id } }: { params: { id: string } }) => {
     <section className="sticky top-24 lg:top-20">
       <div className="container sticky top-24  mx-auto grid grid-cols-[90px,1fr]  md:grid-cols-[200px,1fr] lg:grid-cols-[280px,1fr]">
         {/**sub category **/}
-        <div className=" min-h-[88vh] max-h-[88vh] overflow-y-scroll  grid gap-1 shadow-md scrollbarCustom bg-white py-2">
+        <ScrollArea className="min-h-[88vh] max-h-[88vh] rounded-md border">
           {DisplaySubCatory.map((s, index) => {
-            const link = `/${valideURLConvert(s?.category[0]?.name)}-${
+            const link = `/category/${valideURLConvert(s?.category[0]?.name)}-${
               s?.category[0]?._id
-            }/${valideURLConvert(s.name)}-${s._id}`;
+            }_${valideURLConvert(s.name)}-${s._id}`;
             return (
               <Link
                 href={link}
@@ -101,7 +107,34 @@ const ProductListPage = ({ params: { id } }: { params: { id: string } }) => {
               </Link>
             );
           })}
-        </div>
+        </ScrollArea>
+        {/* <div className=" min-h-[88vh] max-h-[88vh] overflow-y-scroll  grid gap-1 shadow-md scrollbarCustom bg-white py-2">
+          {DisplaySubCatory.map((s, index) => {
+            const link = `/category/${valideURLConvert(s?.category[0]?.name)}-${
+              s?.category[0]?._id
+            }_${valideURLConvert(s.name)}-${s._id}`;
+            return (
+              <Link
+                href={link}
+                className={`w-full p-2 lg:flex items-center lg:w-full lg:h-16 box-border lg:gap-4 border-b 
+                  hover:bg-green-100 cursor-pointer
+                  ${subCategoryId === s._id ? "bg-green-100" : ""}
+                `}
+              >
+                <div className="w-fit max-w-28 mx-auto lg:mx-0 bg-white rounded  box-border">
+                  <img
+                    src={s.image}
+                    alt="subCategory"
+                    className=" w-14 lg:h-14 lg:w-12 h-full object-scale-down"
+                  />
+                </div>
+                <p className="-mt-6 lg:mt-0 text-xs text-center lg:text-left lg:text-base">
+                  {s.name}
+                </p>
+              </Link>
+            );
+          })}
+        </div> */}
 
         {/**Product **/}
         <div className="sticky top-20">

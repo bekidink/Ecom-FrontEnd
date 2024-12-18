@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AddAddress from "@/components/custom/AddAddress";

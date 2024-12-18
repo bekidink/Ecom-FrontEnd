@@ -2,10 +2,13 @@
 import {
   AlarmClock,
   Bell,
-  Grid2X2,
+  AlignJustify ,
   Home,
   Mail,
-  Package2,
+  ChartBarStacked,
+  Layers,
+
+  Plus ,
   Settings,
   User2,
   Users,
@@ -22,30 +25,101 @@ import {
 } from "@/components/ui/card";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useSelector } from "react-redux";
 
 export default function Sidebar() {
   //   const categories = (await getCategories()) || [];
-  
+  const user = useSelector((state) => state?.user);
   const pathname = usePathname();
+  const role=user.role
+const roles = {
+  USER: [
+    {
+      name: "Address",
+      path: "/dashboard/address",
+      icon: Home,
+    },
 
-  
-  const  sidebarLinks= [
-      {
-        name: "Dashboard",
-        path: "/dashboard",
-        icon: Home,
-      },
-      {
-        name: "My Appointments",
-        path: "/dashboard/user/appointments",
-        icon: AlarmClock,
-      },
-      {
-        name: "Inbox",
-        path: "/dashboard/user/inbox",
-        icon: Mail,
-      }
-    ]
+    {
+      name: "My Orders",
+      path: "/dashboard/myorders",
+      icon: Mail,
+    },
+
+    {
+      name: "Profile",
+      path: "/dashboard/profile",
+      icon: User2,
+    },
+  ],
+  ADMIN: [
+    {
+      name: "Category",
+      path: "/dashboard/category",
+      icon: ChartBarStacked,
+    },
+    {
+      name: "Sub Category",
+      path: "/dashboard/subcategory",
+      icon: Layers,
+    },
+    {
+      name: "Product",
+      path: "/dashboard/product",
+      icon: AlignJustify,
+    },
+    {
+      name: "Add Product",
+      path: "/dashboard/upload-product",
+      icon: Plus,
+    },
+
+    {
+      name: "Profile",
+      path: "/dashboard/profile",
+      icon: User2,
+    },
+  ],
+};
+  let sidebarLinks = role ? roles[role] : [];
+  // const sidebarLinks = [
+  //   {
+  //     name: "Dashboard",
+  //     path: "/dashboard",
+  //     icon: Home,
+  //   },
+  //   {
+  //     name: "Category",
+  //     path: "/dashboard/category",
+  //     icon: AlarmClock,
+  //   },
+  //   {
+  //     name: "Sub Category",
+  //     path: "/dashboard/subcategory",
+  //     icon: Mail,
+  //   },
+  //   {
+  //     name: "Product",
+  //     path: "/dashboard/product",
+  //     icon: Mail,
+  //   },
+  //   {
+  //     name: "Add Product",
+  //     path: "/dashboard/upload-product",
+  //     icon: Mail,
+  //   },
+  //   {
+  //     name: "My Orders",
+  //     path: "/dashboard/myorders",
+  //     icon: Mail,
+  //   },
+
+  //   {
+  //     name: "Profile",
+  //     path: "/dashboard/profile",
+  //     icon: Mail,
+  //   },
+  // ];
     
   
   const router = useRouter();
@@ -57,10 +131,10 @@ export default function Sidebar() {
     <div className="hidden border-r bg-muted/40 md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
+          {/* <Link href="/" className="flex items-center gap-2 font-semibold">
             <Package2 className="h-6 w-6" />
             <span className="">EthioMedic</span>
-          </Link>
+          </Link> */}
           <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
             <Bell className="h-4 w-4" />
             <span className="sr-only">Toggle notifications</span>

@@ -85,7 +85,7 @@ const UploadSubCategoryModel = ({ close, fetchData }) => {
 
   return (
     <section className="fixed top-0 right-0 bottom-0 left-0 bg-neutral-800 bg-opacity-70 z-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-5xl bg-white p-4 rounded">
+      <div className="w-full max-w-xl bg-white p-4 rounded">
         <div className="flex items-center justify-between gap-3">
           <h1 className="font-semibold">Add Sub Category</h1>
           <button onClick={close}>
@@ -100,7 +100,7 @@ const UploadSubCategoryModel = ({ close, fetchData }) => {
               name="name"
               value={subCategoryData.name}
               onChange={handleChange}
-              className="p-3 bg-blue-50 border outline-none focus-within:border-primary-200 rounded "
+              className="p-3 bg-blue-50 border outline-none focus-within:border-primary-200 rounded w-1/2"
             />
           </div>
           <div className="grid gap-1">

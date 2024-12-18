@@ -36,7 +36,7 @@ export default function RootLayout({
         <Providers>
           <GlobalProvider>
             <Custom>
-              <Header />
+              
               {children}
             </Custom>
             <Toaster position="top-center" reverseOrder={false} />

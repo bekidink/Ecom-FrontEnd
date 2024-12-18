@@ -102,22 +102,25 @@ const UserMenu = ({ close }) => {
             Product
           </Link>
         )}
-
-        <Link
-          onClick={handleClose}
-          href={"/dashboard/myorders"}
-          className="px-2 hover:bg-orange-200 py-1"
-        >
-          My Orders
-        </Link>
-
-        <Link
-          onClick={handleClose}
-          href={"/dashboard/address"}
-          className="px-2 hover:bg-orange-200 py-1"
-        >
-          Save Address
-        </Link>
+        {!isAdmin(user.role) && (
+          <Link
+            onClick={handleClose}
+            href={"/dashboard/myorders"}
+            className="px-2 hover:bg-orange-200 py-1"
+          >
+            My Orders
+          </Link>
+        )}
+        {!isAdmin(user.role) && (
+          <Link
+            onClick={handleClose}
+            href={"/dashboard/address"}
+            className="px-2 hover:bg-orange-200 py-1"
+          >
+            Save Address
+          </Link>
+        )}
+        
 
         <button
           onClick={handleLogout}

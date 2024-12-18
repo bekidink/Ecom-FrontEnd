@@ -1,39 +1,42 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 // import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 import { FaArrowLeft } from "react-icons/fa";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/use-mobile";
 // import useMobile from "@/hooks/use-mobile";
 
 const Search = () => {
-  
   const location = usePathname();
   const [isSearchPage, setIsSearchPage] = useState(false);
-  // const [isMobile] = useMobile();
+  const isMobile = useIsMobile();
   const params = usePathname();
-  const searchText = params;
-
+  const searchText = params.split("/")[2];
+ const router=useRouter()
   useEffect(() => {
-    const isSearch = location === "/search";
+    const isSearch = location.startsWith("/search") ;
     setIsSearchPage(isSearch);
   }, [location]);
 
   const redirectToSearchPage = () => {
+    router.push("/search/n")
     // navigate("/search");
   };
 
   const handleOnChange = (e) => {
     const value = e.target.value;
     const url = `/search?q=${value}`;
+     router.push(`/search/${value}`);
     // navigate(url);
   };
 
   return (
     <div className="w-full  min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-500 bg-slate-50 group focus-within:border-primary-200 ">
       <div>
-        { isSearchPage ? (
+        {isMobile && isSearchPage ? (
           <Link
             href={"/"}
             className="flex justify-center items-center h-full p-2 m-1 group-focus-within:text-primary-200 bg-white rounded-full shadow-md"

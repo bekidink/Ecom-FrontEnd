@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import UploadSubCategoryModel from "@/components/custom/UploadSubCategoryModel";
 import AxiosToastError from "@/utils/AxiosToastError";
@@ -12,6 +13,7 @@ import { HiPencil } from "react-icons/hi";
 import EditSubCategory from "@/components/custom/EditSubCategory";
 import CofirmBox from "@/components/custom/ConfirmBox";
 import toast from "react-hot-toast";
+import DataTable from "@/components/data-table-components/DataTable";
 
 const SubCategoryPage = () => {
   const [openAddSubCategory, setOpenAddSubCategory] = useState(false);
@@ -151,8 +153,9 @@ const SubCategoryPage = () => {
         </button>
       </div>
 
-      <div className="overflow-auto w-full max-w-[95vw]">
-        <DisplayTable data={data} column={column} />
+      <div className="mx-5 mt-5 overflow-auto w-full max-w-[80vw] ">
+        {/* <DisplayTable data={data} columns={column} /> */}
+        <DataTable data={data} columns={column} filterKeys={['name']} />
       </div>
 
       {openAddSubCategory && (

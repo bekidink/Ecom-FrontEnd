@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { useGlobalContext } from "@/provider/GlobalProvider";
 import { DisplayPriceInRupees } from "@/utils/DisplayPriceInDolar";
@@ -8,7 +9,7 @@ import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
 import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 const CheckoutPage = () => {
   const {
@@ -22,7 +23,7 @@ const CheckoutPage = () => {
   const addressList = useSelector((state) => state.addresses.addressList);
   const [selectAddress, setSelectAddress] = useState(0);
   const cartItemsList = useSelector((state) => state.cartItem.cart);
-const router=useRouter()
+// const router=useRouter()
   const handleCashOnDelivery = async () => {
     try {
       const response = await Axios({
@@ -45,10 +46,10 @@ const router=useRouter()
         if (fetchOrder) {
           fetchOrder();
         }
-        router.push({
-          pathname: "/success",
-          query: { text: "Order" },
-        });
+        // router.push({
+        //   pathname: "/success",
+        //   query: { text: "Order" },
+        // });
         
       }
     } catch (error) {
@@ -59,7 +60,7 @@ const router=useRouter()
   const handleOnlinePayment = async () => {
     try {
       toast.loading("Loading...");
-      const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+      const stripePublicKey = process.env.STRIPE_SECRET_KEY!;
       const stripePromise = await loadStripe(stripePublicKey);
 
       const response = await Axios({
@@ -74,7 +75,7 @@ const router=useRouter()
 
       const { data: responseData } = response;
 
-      stripePromise.redirectToCheckout({ sessionId: responseData.id });
+      stripePromise?.redirectToCheckout({ sessionId: responseData.id });
 
       if (fetchCartItem) {
         fetchCartItem();
