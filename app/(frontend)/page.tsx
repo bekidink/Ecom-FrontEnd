@@ -62,7 +62,7 @@ const Home = () => {
           } `}
         >
           <img
-            src="https://i.pinimg.com/236x/42/21/92/42219265cea7d7fc3200f6808021b22a.jpg"
+            src="/banner.jpg"
             className="w-full h-full hidden lg:block"
             alt="banner"
           />
@@ -105,7 +105,7 @@ const Home = () => {
             dotListClass="custom-dot-list-style"
             itemClass="px-4"
           >
-            {categoryData.map((cat: any, index) => {
+            {categoryData.map((cat:any, index) => {
               return (
                 <div
                   key={index + "displayCategory"}
@@ -128,7 +128,7 @@ const Home = () => {
       </div>
 
       {/***display category product */}
-      {categoryData?.map((c: any, index) => {
+      {categoryData?.map((c:any, index) => {
         return (
           <CategoryWiseProductDisplay
             key={index + "CategorywiseProduct"}
