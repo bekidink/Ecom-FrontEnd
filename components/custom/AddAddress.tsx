@@ -7,7 +7,7 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from "@/provider/GlobalProvider";
 
-const AddAddress = ({ close }) => {
+const AddAddress = ({ close }:any) => {
   const { register, handleSubmit, reset } = useForm();
   const { fetchAddress } = useGlobalContext();
 

@@ -1,18 +1,17 @@
-"use client"
+"use client";
+
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React from "react";
-// import { Link, useLocation } from "react-router-dom";
+import React, { Suspense } from "react";
 
-const Success = () => {
-  const  text  = useSearchParams();
- 
-  console.log("location");
+const SuccessContent = () => {
+  const searchParams = useSearchParams();
+  const text = searchParams.get("text"); // Extract a specific query parameter, if any.
+
   return (
     <div className="m-2 w-full max-w-md bg-green-200 p-4 py-5 rounded mx-auto flex flex-col justify-center items-center gap-5">
       <p className="text-green-800 font-bold text-lg text-center">
-        {Boolean(text) ? text : "Payment"}{" "}
-        Successfully
+        {text ? text : "Payment"} Successfully
       </p>
       <Link
         href="/"
@@ -23,5 +22,11 @@ const Success = () => {
     </div>
   );
 };
+
+const Success = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <SuccessContent />
+  </Suspense>
+);
 
 export default Success;

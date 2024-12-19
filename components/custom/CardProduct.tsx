@@ -7,7 +7,7 @@ import { pricewithDiscount } from "@/utils/PriceWithDiscount";
 import AddToCartButton from "./AddToCartButton";
 import Link from "next/link";
 
-const CardProduct = ({ data }) => {
+const CardProduct = ({ data }:any) => {
   const url = `/product/${valideURLConvert(data.name)}-${data._id}`;
 
   return (

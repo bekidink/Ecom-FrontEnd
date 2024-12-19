@@ -23,10 +23,10 @@ const Home = () => {
   );
   // const navigate = useNavigate();
   const router = useRouter();
-  const handleRedirectProductListpage = (id, cat) => {
+  const handleRedirectProductListpage = (id:any, cat:any) => {
     console.log(id, cat);
-    const subcategory = subCategoryData.find((sub) => {
-      const filterData = sub.category.some((c) => {
+    const subcategory:any = subCategoryData.find((sub:any) => {
+      const filterData = sub.category.some((c:any) => {
         return c._id == id;
       });
 
@@ -105,7 +105,7 @@ const Home = () => {
             dotListClass="custom-dot-list-style"
             itemClass="px-4"
           >
-            {categoryData.map((cat, index) => {
+            {categoryData.map((cat:any, index) => {
               return (
                 <div
                   key={index + "displayCategory"}
@@ -128,7 +128,7 @@ const Home = () => {
       </div>
 
       {/***display category product */}
-      {categoryData?.map((c, index) => {
+      {categoryData?.map((c:any, index) => {
         return (
           <CategoryWiseProductDisplay
             key={index + "CategorywiseProduct"}

@@ -10,7 +10,7 @@ import { valideURLConvert } from "@/utils/valideURLConvert";
 import Link from "next/link";
 import { RootState } from "@/store/store";
 
-const CategoryWiseProductDisplay = ({ id, name }) => {
+const CategoryWiseProductDisplay = ({ id, name }:any) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   //   const containerRef = useRef();
@@ -54,8 +54,8 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
   };
 
   const handleRedirectProductListpage = () => {
-    const subcategory = subCategoryData.find((sub) => {
-      const filterData = sub.category.some((c) => {
+    const subcategory:any = subCategoryData.find((sub:any) => {
+      const filterData = sub.category.some((c:any) => {
         return c._id == id;
       });
 
@@ -93,7 +93,7 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
               );
             })}
 
-          {data.map((p, index) => {
+          {data.map((p:any, index) => {
             return (
               <CardProduct
                 data={p}
