@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import AxiosToastError from "@/utils/AxiosToastError";
 import { Button } from "../ui/button";
 
-const EditSubCategory = ({ close, data, fetchData }:{close:any,data:any,fetchData:any}) => {
+const EditSubCategory = ({ close, data, fetchData }) => {
   const [subCategoryData, setSubCategoryData] = useState({
     _id: data._id,
     name: data.name,
@@ -139,7 +139,7 @@ const EditSubCategory = ({ close, data, fetchData }:{close:any,data:any,fetchDat
                 {subCategoryData.category.map((cat, index) => {
                   return (
                     <p
-                      key={cat._id + "selectedValue"}
+                      key={cat._id +index + "selectedValue"}
                       className="bg-white shadow-md px-1 m-1 flex items-center gap-2"
                     >
                       {cat.name}
@@ -175,7 +175,7 @@ const EditSubCategory = ({ close, data, fetchData }:{close:any,data:any,fetchDat
                 {allCategory.map((category, index) => {
                   return (
                     <option
-                      value={category?._id}
+                      value={category?._id +index}
                       key={category._id + "subcategory"}
                     >
                       {category?.name}

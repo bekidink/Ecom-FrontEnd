@@ -2,10 +2,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Provider } from "react-redux";
-import { store } from "@/store/store";
+
 import { Custom, Providers } from "./Provider";
-import Header from "@/components/custom/Header";
 import GlobalProvider from "@/provider/GlobalProvider";
 import { Toaster } from "react-hot-toast";
 const geistSans = Geist({

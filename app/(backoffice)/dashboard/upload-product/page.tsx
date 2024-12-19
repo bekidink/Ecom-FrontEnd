@@ -12,7 +12,6 @@ import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
 import AxiosToastError from "@/utils/AxiosToastError";
 import successAlert from "@/utils/SuccessAlert";
-import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
 const UploadProduct = () => {
@@ -255,7 +254,7 @@ const UploadProduct = () => {
                 >
                   <option value={""}>Select Category</option>
                   {allCategory.map((c, index) => {
-                    return <option value={c?._id}>{c.name}</option>;
+                    return <option key={index} value={c?._id}>{c.name}</option>;
                   })}
                 </select>
                 <div className="flex flex-wrap gap-3">
@@ -303,7 +302,7 @@ const UploadProduct = () => {
                     Select Sub Category
                   </option>
                   {allSubCategory.map((c, index) => {
-                    return <option value={c?._id}>{c.name}</option>;
+                    return <option key={index} value={c?._id}>{c.name}</option>;
                   })}
                 </select>
                 <div className="flex flex-wrap gap-3">
@@ -396,7 +395,7 @@ const UploadProduct = () => {
           <div className="grid grid-cols-4 gap-4">
             {Object?.keys(data?.more_details)?.map((k, index) => {
               return (
-                <div className="grid gap-1">
+                <div className="grid gap-1" key={index}>
                   <label htmlFor={k} className="font-medium">
                     {k}
                   </label>

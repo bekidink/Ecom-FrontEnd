@@ -12,7 +12,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
     image: "",
   });
   const [loading, setLoading] = useState(false);
-
+console.log(loading)
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 

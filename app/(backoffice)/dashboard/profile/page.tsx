@@ -29,7 +29,7 @@ const Profile = () => {
     });
   }, [user]);
 
-  const handleOnChange = (e:any) => {
+  const handleOnChange = (e) => {
     const { name, value } = e.target;
 
     setUserData((preve) => {
@@ -40,7 +40,7 @@ const Profile = () => {
     });
   };
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {

@@ -2,18 +2,13 @@ import React from "react";
 import { DisplayPriceInRupees } from "@/utils/DisplayPriceInDolar";
 import { valideURLConvert } from "@/utils/valideURLConvert";
 import { pricewithDiscount } from "@/utils/PriceWithDiscount";
-import SummaryApi from "@/utils/summaryApi";
-import AxiosToastError from "@/utils/AxiosToastError";
-import Axios from "@/utils/Axios";
-import toast from "react-hot-toast";
-import { useState } from "react";
-import { useGlobalContext } from "@/provider/GlobalProvider";
+
+
 import AddToCartButton from "./AddToCartButton";
 import Link from "next/link";
 
 const CardProduct = ({ data }) => {
   const url = `/product/${valideURLConvert(data.name)}-${data._id}`;
-  const [loading, setLoading] = useState(false);
 
   return (
     <Link

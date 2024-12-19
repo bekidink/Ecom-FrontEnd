@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import EditProductAdmin from "./EditProductAdmin";
-import CofirmBox from "./ConfirmBox";
+
 import { IoClose } from "react-icons/io5";
 import SummaryApi from "@/utils/summaryApi";
 import Axios from "@/utils/Axios";
 import AxiosToastError from "@/utils/AxiosToastError";
 import toast from "react-hot-toast";
 
-const ProductCardAdmin = ({ data, fetchProductData }:{data:any,fetchProductData:any}) => {
+const ProductCardAdmin = ({ data, fetchProductData }) => {
   const [editOpen, setEditOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 

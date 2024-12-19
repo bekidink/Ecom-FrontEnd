@@ -1,23 +1,16 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import CardLoading from "@/components/custom/CardLoading";
 import SummaryApi from "@/utils/summaryApi";
 import Axios from "@/utils/Axios";
 import AxiosToastError from "@/utils/AxiosToastError";
-import CardProduct from "@/components/custom/CardProduct";
-import InfiniteScroll from "react-infinite-scroll-component";
-import noDataImage from "@/assets/nothing here yet.webp";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
+
 
 const SearchPage = ({ params: { slug} }: { params: { slug: string } }) => {
   console.log("slug",slug)
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const loadingArrayCard = new Array(10).fill(null);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-  const params = useSearchParams();
   const searchText = slug;
 
   const fetchData = async () => {
@@ -36,6 +29,7 @@ const SearchPage = ({ params: { slug} }: { params: { slug: string } }) => {
       if (responseData.success) {
         if (responseData.page == 1) {
           setData(responseData.data);
+          
         } else {
           setData((preve) => {
             return [...preve, ...responseData.data];
@@ -43,8 +37,10 @@ const SearchPage = ({ params: { slug} }: { params: { slug: string } }) => {
         }
         setTotalPage(responseData.totalPage);
         console.log(responseData);
+
       }
     } catch (error) {
+      setPage(1);
       AxiosToastError(error);
     } finally {
       setLoading(false);
@@ -55,13 +51,13 @@ const SearchPage = ({ params: { slug} }: { params: { slug: string } }) => {
     fetchData();
   }, [page, searchText]);
 
-  console.log("page", page);
+  console.log("page", page,totalPage,);
 
-  const handleFetchMore = () => {
-    if (totalPage > page) {
-      setPage((preve) => preve + 1);
-    }
-  };
+  // const handleFetchMore = () => {
+  //   if (totalPage > page) {
+  //     setPage((preve) => preve + 1);
+  //   }
+  // };
 
   return (
     <div className="container mx-auto p-4">

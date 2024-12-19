@@ -2,24 +2,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import NoData from "@/components/custom/NoData";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
+  
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 const MyOrders = () => {
   const orders = useSelector((state) => state.orders.order);
 

@@ -1,8 +1,7 @@
 "use client"
 
 // import { Cross2Icon } from "@radix-ui/react-icons"
-import { Table } from "@tanstack/react-table"
-import { CrossIcon } from "lucide-react"
+
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 
@@ -22,11 +21,11 @@ export default function DataTableToolbar({
         table.getColumn(key)?.setFilterValue(value);
       };
     
-      const handleResetClick = () => {
-        filterKeys.forEach((key) => {
-          table.getColumn(key)?.setFilterValue('');
-        });
-      };
+      // const handleResetClick = () => {
+      //   filterKeys.forEach((key) => {
+      //     table.getColumn(key)?.setFilterValue('');
+      //   });
+      // };
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">

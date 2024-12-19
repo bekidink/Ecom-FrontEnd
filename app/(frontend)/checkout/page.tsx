@@ -97,6 +97,7 @@ const CheckoutPage = () => {
             {addressList.map((address, index) => {
               return (
                 <label
+                key={index}
                   htmlFor={"address" + index}
                   className={!address.status && "hidden"}
                 >

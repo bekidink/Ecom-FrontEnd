@@ -7,7 +7,7 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from "@/provider/GlobalProvider";
 
-const EditAddressDetails = ({ close, data }:{close:any,data:any}) => {
+const EditAddressDetails = ({ close, data }) => {
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       _id: data._id,
@@ -22,7 +22,7 @@ const EditAddressDetails = ({ close, data }:{close:any,data:any}) => {
   });
   const { fetchAddress } = useGlobalContext();
 
-  const onSubmit = async (data:any) => {
+  const onSubmit = async (data) => {
     try {
       const response = await Axios({
         ...SummaryApi.updateAddress,

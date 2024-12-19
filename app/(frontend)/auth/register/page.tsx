@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import { FaRegEyeSlash } from "react-icons/fa6";
-import { FaRegEye } from "react-icons/fa6";
+
 import toast from "react-hot-toast";
 import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
@@ -34,22 +33,11 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  //   const navigate = useNavigate();
+ 
 const form = useForm<z.infer<typeof formSchema>>({
   resolver: zodResolver(formSchema),
 });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setData((preve) => {
-      return {
-        ...preve,
-        [name]: value,
-      };
-    });
-  };
+  
 
   const valideValue = Object.values(data).every((el) => el);
     async function onSubmit(data: z.infer<typeof formSchema>) {
@@ -77,38 +65,7 @@ const form = useForm<z.infer<typeof formSchema>>({
      AxiosToastError(error);
    }
 }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (data.password !== data.confirmPassword) {
-      toast.error("password and confirm password must be same");
-      return;
-    }
-
-    try {
-      const response = await Axios({
-        ...SummaryApi.register,
-        data: data,
-      });
-
-      if (response.data.error) {
-        toast.error(response.data.message);
-      }
-
-      if (response.data.success) {
-        toast.success(response.data.message);
-        setData({
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        });
-        // navigate("/login");
-      }
-    } catch (error) {
-      AxiosToastError(error);
-    }
-  };
+  
   return (
     <section className="w-full container mx-auto px-2">
       <div className="bg-white my-4 w-full max-w-lg mx-auto rounded p-7">

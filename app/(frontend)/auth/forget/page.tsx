@@ -1,11 +1,10 @@
+"use client"
 import React, { useState } from "react";
-import { FaRegEyeSlash } from "react-icons/fa6";
-import { FaRegEye } from "react-icons/fa6";
+
 import toast from "react-hot-toast";
 import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
 import AxiosToastError from "@/utils/AxiosToastError";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const ForgotPassword = () => {
@@ -13,8 +12,7 @@ const ForgotPassword = () => {
     email: "",
   });
 //   const navigate = useNavigate();
-  const router=useRouter()
-  const handleChange = (e:any) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -27,7 +25,7 @@ const ForgotPassword = () => {
 
   const valideValue = Object.values(data).every((el) => el);
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -45,10 +43,10 @@ const ForgotPassword = () => {
         // router.push("/verification-otp", {
         //   state: data,
         // });
-        router.push({
-          pathname: "/verification-otp",
-          query: data,
-        });
+        // router.push({
+        //   pathname: "/verification-otp",
+        //   query: data,
+        // });
         setData({
           email: "",
         });

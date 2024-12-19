@@ -11,12 +11,10 @@ import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
 import AxiosToastError from "@/utils/AxiosToastError";
 import successAlert from "@/utils/SuccessAlert";
-import { useEffect } from "react";
+
 import { Button } from "../ui/button";
 
-const EditProductAdmin = ({ close, data: propsData, fetchProductData }:{
-    close:any,data:any,fetchProductData:any
-}) => {
+const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
   const [data, setData] = useState({
     _id: propsData._id,
     name: propsData.name,
@@ -51,7 +49,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }:{
     });
   };
 
-  const handleUploadImage = async (e:any) => {
+  const handleUploadImage = async (e) => {
     const file = e.target.files[0];
 
     if (!file) {
@@ -111,7 +109,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }:{
     setOpenAddField(false);
   };
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("data", data);
 
@@ -264,7 +262,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }:{
                   >
                     <option value={""}>Select Category</option>
                     {allCategory.map((c, index) => {
-                      return <option value={c?._id}>{c.name}</option>;
+                      return <option key={index} value={c?._id}>{c.name}</option>;
                     })}
                   </select>
                   <div className="flex flex-wrap gap-3">
@@ -312,7 +310,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }:{
                       Select Sub Category
                     </option>
                     {allSubCategory.map((c, index) => {
-                      return <option value={c?._id}>{c.name}</option>;
+                      return <option key={index} value={c?._id}>{c.name}</option>;
                     })}
                   </select>
                   <div className="flex flex-wrap gap-3">
@@ -403,7 +401,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }:{
               {/**add more field**/}
               {Object?.keys(data?.more_details)?.map((k, index) => {
                 return (
-                  <div className="grid gap-1">
+                  <div className="grid gap-1" key={index}>
                     <label htmlFor={k} className="font-medium">
                       {k}
                     </label>

@@ -7,11 +7,11 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from "@/provider/GlobalProvider";
 
-const AddAddress = ({ close }:any) => {
+const AddAddress = ({ close }) => {
   const { register, handleSubmit, reset } = useForm();
   const { fetchAddress } = useGlobalContext();
 
-  const onSubmit = async (data:any) => {
+  const onSubmit = async (data) => {
     console.log("data", data);
 
     try {

@@ -28,7 +28,7 @@ const Search = () => {
 
   const handleOnChange = (e) => {
     const value = e.target.value;
-    const url = `/search?q=${value}`;
+    
      router.push(`/search/${value}`);
     // navigate(url);
   };

@@ -9,21 +9,20 @@ import { useSelector } from "react-redux";
 import { valideURLConvert } from "@/utils/valideURLConvert";
 import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-const ProductListPage = ({ params: { id } }: { params: { id: string } }) => {
+const ProductListPage = ({ params: { id } }) => {
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalPage, setTotalPage] = useState(1);
   const AllSubCategory = useSelector((state) => state.product.allSubCategory);
   const [DisplaySubCatory, setDisplaySubCategory] = useState([]);
 
-  console.log(AllSubCategory);
+  
   
   const CategoryParms = id.split("_");
   const categoryParams = CategoryParms[0]
   const subCategoryParams = CategoryParms[1];
-  console.log("category",CategoryParms);
+  console.log("category",CategoryParms,totalPage);
   const subCategory=CategoryParms[1].split("-")
   const subCategoryName = subCategory
     ?.slice(0, subCategory?.length - 1)
@@ -34,27 +33,28 @@ const ProductListPage = ({ params: { id } }: { params: { id: string } }) => {
 
   const fetchProductdata = async () => {
     try {
-      setLoading(true);
-      const response = await Axios({
-        ...SummaryApi.getProductByCategoryAndSubCategory,
-        data: {
-          categoryId: categoryId,
-          subCategoryId: subCategoryId,
-          page: page,
-          limit: 8,
-        },
-      });
+      // setLoading(true);
+      // const response = await Axios({
+      //   url: SummaryApi.getProductByCategoryAndSubCategory.url,
+      //   method: SummaryApi.getProductByCategoryAndSubCategory.method,
+      //   data: {
+      //     categoryId: categoryId,
+      //     subCategoryId: subCategoryId,
+      //     page: "1",
+      //     limit: 8,
+      //   },
+      // });
 
-      const { data: responseData } = response;
+      // const { data: responseData } = response;
 
-      if (responseData.success) {
-        if (responseData.page == 1) {
-          setData(responseData.data);
-        } else {
-          setData([...data, ...responseData.data]);
-        }
-        setTotalPage(responseData.totalCount);
-      }
+      // if (responseData.success) {
+      //   if (responseData.page == 1) {
+      //     setData(responseData.data);
+      //   } else {
+      //     setData([...data, ...responseData.data]);
+      //   }
+      //   setTotalPage(responseData.totalCount);
+      // }
     } catch (error) {
       AxiosToastError(error);
     } finally {
@@ -64,11 +64,11 @@ const ProductListPage = ({ params: { id } }: { params: { id: string } }) => {
 
   useEffect(() => {
     fetchProductdata();
-  }, [id]);
+  }, []);
 
   useEffect(() => {
-    const sub = AllSubCategory.filter((s:any) => {
-      const filterData = s.category.some((el:any) => {
+    const sub = AllSubCategory.filter((s) => {
+      const filterData = s.category.some((el) => {
         return el._id == categoryId;
       });
 
@@ -89,6 +89,7 @@ const ProductListPage = ({ params: { id } }: { params: { id: string } }) => {
             return (
               <Link
                 href={link}
+                key={index}
                 className={`w-full p-2 lg:flex items-center lg:w-full lg:h-16 box-border lg:gap-4 border-b 
                   hover:bg-green-100 cursor-pointer
                   ${subCategoryId === s._id ? "bg-green-100" : ""}

@@ -1,15 +1,13 @@
 "use client";
 import React from "react";
 import banner from "@/assets/banner.jpg";
-import bannerMobile from "@/assets/banner-mobile.jpg";
 import { useSelector } from "react-redux";
 import { valideURLConvert } from "../../utils/valideURLConvert";
 import CategoryWiseProductDisplay from "@/components/custom/CategoryWiseProductDisplay";
 import { useRouter } from "next/navigation";
 // import { Link, useNavigate } from "react-router-dom";
 // import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
-import { Card, CardContent } from "@/components/ui/card";
-import Autoplay from "embla-carousel-autoplay";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 const Home = () => {
@@ -103,7 +101,7 @@ const Home = () => {
             {categoryData.map((cat, index) => {
               return (
                 <div
-                  key={cat._id + "displayCategory"}
+                  key={index + "displayCategory"}
                   className="w-full h-full"
                   onClick={() =>
                     handleRedirectProductListpage(cat._id, cat.name)
@@ -126,7 +124,7 @@ const Home = () => {
       {categoryData?.map((c, index) => {
         return (
           <CategoryWiseProductDisplay
-            key={c?._id + "CategorywiseProduct"}
+            key={index + "CategorywiseProduct"}
             id={c?._id}
             name={c?.name}
           />

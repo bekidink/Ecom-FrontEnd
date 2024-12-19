@@ -1,18 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FaRegEyeSlash } from "react-icons/fa6";
-import { FaRegEye } from "react-icons/fa6";
+"use client"
+import React, { useRef, useState } from "react";
+
 import toast from "react-hot-toast";
 import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
 import AxiosToastError from "@/utils/AxiosToastError";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const OtpVerification = () => {
   const [data, setData] = useState(["", "", "", "", "", ""]);
   const inputRef = useRef([]);
-const router=useRouter()
-  console.log("location", location);
+
 
 //   useEffect(() => {
 //     if (!location?.state?.email) {
@@ -22,7 +20,7 @@ const router=useRouter()
 
   const valideValue = data.every((el) => el);
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -41,15 +39,15 @@ const router=useRouter()
       if (response.data.success) {
         toast.success(response.data.message);
         setData(["", "", "", "", "", ""]);
-        const send = {
-          data: response.data,
+        // const send = {
+        //   data: response.data,
         //   email: location?.state?.email,
-        };
+        // };
        
-        router.push({
-          pathname: "/auth/reset",
-          query: send,
-        });
+        // router.push({
+        //   pathname: "/auth/reset",
+        //   query: send,
+        // });
       }
     } catch (error) {
       console.log("error", error);

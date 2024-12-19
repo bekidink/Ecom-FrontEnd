@@ -1,11 +1,11 @@
+"use client"
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 // import { Link, useLocation } from "react-router-dom";
 
 const Success = () => {
-  const router = useRouter();
-  const { text } = router.query;
+  const  text  = useSearchParams();
  
   console.log("location");
   return (

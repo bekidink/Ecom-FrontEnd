@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AddAddress from "@/components/custom/AddAddress";
@@ -49,7 +50,7 @@ const Address = () => {
       <div className="bg-blue-50 p-2 grid gap-4">
         {addressList.map((address, index) => {
           return (
-            <div
+            <div key={index}
               className={`border rounded p-3 flex gap-3 bg-white ${
                 !address.status && "hidden"
               }`}

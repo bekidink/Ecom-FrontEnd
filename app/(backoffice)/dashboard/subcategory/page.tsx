@@ -4,10 +4,8 @@ import UploadSubCategoryModel from "@/components/custom/UploadSubCategoryModel";
 import AxiosToastError from "@/utils/AxiosToastError";
 import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
-import DisplayTable from "@/components/custom/DisplayTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import ViewImage from "@/components/custom/ViewImage";
-import { LuPencil } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import { HiPencil } from "react-icons/hi";
 import EditSubCategory from "@/components/custom/EditSubCategory";
@@ -82,7 +80,7 @@ const SubCategoryPage = () => {
             {row.original.category.map((c, index) => {
               return (
                 <p
-                  key={c._id + "table"}
+                  key={index + "table"}
                   className="shadow-md px-1 inline-block"
                 >
                   {c.name}
@@ -141,6 +139,7 @@ const SubCategoryPage = () => {
       AxiosToastError(error);
     }
   };
+  console.log(loading)
   return (
     <section className="">
       <div className="p-2   bg-white shadow-md flex items-center justify-between">

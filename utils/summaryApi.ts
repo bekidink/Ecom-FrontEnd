@@ -1,158 +1,161 @@
-export const baseURL = process.env.URL || "https://ecom-backend-3-0ne5.onrender.com/";
-
+export const baseURL = process.env.URL ;
+interface ApiConfig {
+  url: string;
+  method: string;
+}
 const SummaryApi = {
   register: {
     url: "/api/v1/register",
     method: "post",
-  },
+  }as ApiConfig,
   login: {
     url: "/api/v1/login",
     method: "post",
-  },
+  }as ApiConfig,
   forgot_password: {
     url: "/api/v1/forgot-password",
     method: "put",
-  },
+  }as ApiConfig,
   forgot_password_otp_verification: {
     url: "api/v1/verify-forgot-password-otp",
     method: "put",
-  },
+  }as ApiConfig,
   resetPassword: {
     url: "/api/v1/reset-password",
     method: "put",
-  },
+  }as ApiConfig,
   refreshToken: {
     url: "api/v1/refresh-token",
     method: "post",
-  },
+  }as ApiConfig,
   userDetails: {
     url: "/api/v1/user-details",
     method: "get",
-  },
+  }as ApiConfig,
   logout: {
     url: "/api/v1/logout",
     method: "get",
-  },
+  }as ApiConfig,
   uploadAvatar: {
     url: "/api/v1/upload-avatar",
     method: "put",
-  },
+  }as ApiConfig,
   updateUserDetails: {
     url: "/api/v1/update-user",
     method: "put",
-  },
+  }as ApiConfig,
   addCategory: {
     url: "/api/v1/add-category",
     method: "post",
-  },
+  }as ApiConfig,
   uploadImage: {
     url: "/api/v1/upload",
     method: "post",
-  },
+  }as ApiConfig,
   getCategory: {
     url: "/api/v1/get-category",
     method: "get",
-  },
+  }as ApiConfig,
   updateCategory: {
     url: "/api/v1/update-category",
     method: "put",
-  },
+  }as ApiConfig,
   deleteCategory: {
     url: "/api/v1/delete-category",
     method: "delete",
-  },
+  }as ApiConfig,
   createSubCategory: {
     url: "/api/v1/create-subCategory",
     method: "post",
-  },
+  }as ApiConfig,
   getSubCategory: {
     url: "/api/v1/get-subCategory",
     method: "post",
-  },
+  }as ApiConfig,
   updateSubCategory: {
     url: "/api/v1/update-subCategory",
     method: "put",
-  },
+  }as ApiConfig,
   deleteSubCategory: {
     url: "/api/v1/delete-subCategory",
     method: "delete",
-  },
+  }as ApiConfig,
   createProduct: {
     url: "/api/v1/create-product",
     method: "post",
-  },
+  }as ApiConfig,
   getProduct: {
     url: "/api/v1/get-product",
     method: "post",
-  },
+  }as ApiConfig,
   getProductByCategory: {
     url: "/api/v1/get-product-by-category",
     method: "post",
-  },
+  }as ApiConfig,
   getProductByCategoryAndSubCategory: {
     url: "/api/v1/get-pruduct-by-category-and-subcategory",
     method: "post",
-  },
+  }as ApiConfig,
   getProductDetails: {
     url: "/api/v1/get-product-details",
     method: "post",
-  },
+  }as ApiConfig,
   updateProductDetails: {
     url: "/api/v1/update-product-details",
     method: "put",
-  },
+  }as ApiConfig,
   deleteProduct: {
     url: "/api/v1/delete-product",
     method: "delete",
-  },
+  }as ApiConfig,
   searchProduct: {
     url: "/api/v1/search-product",
     method: "post",
-  },
+  }as ApiConfig,
   addTocart: {
     url: "/api/v1/create-cart",
     method: "post",
-  },
+  }as ApiConfig,
   getCartItem: {
     url: "/api/v1/get-cart",
     method: "get",
-  },
+  }as ApiConfig,
   updateCartItemQty: {
     url: "/api/v1/update-qty",
     method: "put",
-  },
+  }as ApiConfig,
   deleteCartItem: {
     url: "/api/v1/delete-cart-item",
     method: "delete",
-  },
+  }as ApiConfig,
   createAddress: {
     url: "/api/v1/create-address",
     method: "post",
-  },
+  }as ApiConfig,
   getAddress: {
     url: "/api/v1/get-address",
     method: "get",
-  },
+  }as ApiConfig,
   updateAddress: {
     url: "/api/v1/update-address",
     method: "put",
-  },
+  }as ApiConfig,
   disableAddress: {
     url: "/api/v1/disable-address",
     method: "delete",
-  },
+  }as ApiConfig,
   CashOnDeliveryOrder: {
     url: "/api/v1/cash-on-delivery",
     method: "post",
-  },
+  }as ApiConfig,
   payment_url: {
     url: "/api/v1/checkout-order",
     method: "post",
-  },
+  }as ApiConfig,
   getOrderItems: {
     url: "/api/v1/order-list",
     method: "get",
-  },
+  }as ApiConfig,
 };
 
 export default SummaryApi;

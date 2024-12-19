@@ -1,21 +1,18 @@
 "use client"
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect,  useState } from "react";
 import SummaryApi from "@/utils/summaryApi";
 import Axios from "@/utils/Axios";
 import AxiosToastError from "@/utils/AxiosToastError";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import { DisplayPriceInRupees } from "@/utils/DisplayPriceInDolar";
 import Divider from "@/components/custom/Divider";
-import image1 from "@/assets/minute_delivery.png";
-import image2 from "@/assets/Best_Prices_Offers.png";
-import image3 from "@/assets/Wide_Assortment.png";
+
 import { pricewithDiscount } from "@/utils/PriceWithDiscount";
 import AddToCartButton from "@/components/custom/AddToCartButton";
-import { useSearchParams } from "next/navigation";
 
-const ProductDisplayPage = ({ params }: any) => {
+const ProductDisplayPage = ({ params }) => {
 
-  let productId = params.slug.split("-")?.slice(-1)[0];
+  const productId = params.slug.split("-")?.slice(-1)[0];
   const [data, setData] = useState({
     name: "",
     image: [],
@@ -23,7 +20,7 @@ const ProductDisplayPage = ({ params }: any) => {
   const [image, setImage] = useState(0);
   const [loading, setLoading] = useState(false);
 //   const imageContainer = useRef();
-
+console.log(loading)
   const fetchProductDetails = async () => {
     try {
       const response = await Axios({
@@ -127,7 +124,7 @@ const ProductDisplayPage = ({ params }: any) => {
           {data?.more_details &&
             Object.keys(data?.more_details).map((element, index) => {
               return (
-                <div>
+                <div key={index}>
                   <p className="font-semibold">{element}</p>
                   <p className="text-base">{data?.more_details[element]}</p>
                 </div>
@@ -231,7 +228,7 @@ const ProductDisplayPage = ({ params }: any) => {
           {data?.more_details &&
             Object.keys(data?.more_details).map((element, index) => {
               return (
-                <div>
+                <div key={index}>
                   <p className="font-semibold">{element}</p>
                   <p className="text-base">{data?.more_details[element]}</p>
                 </div>

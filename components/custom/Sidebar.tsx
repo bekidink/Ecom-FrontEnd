@@ -1,6 +1,6 @@
 "use client";
 import {
-  AlarmClock,
+  
   Bell,
   AlignJustify ,
   Home,
@@ -9,9 +9,9 @@ import {
   Layers,
 
   Plus ,
-  Settings,
+  
   User2,
-  Users,
+  
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -81,7 +81,7 @@ const roles = {
     },
   ],
 };
-  let sidebarLinks = role ? roles[role] : [];
+  const sidebarLinks = role ? roles[role] : [];
   // const sidebarLinks = [
   //   {
   //     name: "Dashboard",

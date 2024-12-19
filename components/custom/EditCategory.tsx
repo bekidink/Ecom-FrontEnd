@@ -6,7 +6,7 @@ import SummaryApi from "@/utils/summaryApi";
 import toast from "react-hot-toast";
 import AxiosToastError from "@/utils/AxiosToastError";
 
-const EditCategory = ({ close, fetchData, data: CategoryData }:{close:any,fetchData:any,data:any}) => {
+const EditCategory = ({ close, fetchData, data: CategoryData }) => {
   const [data, setData] = useState({
     _id: CategoryData._id,
     name: CategoryData.name,
@@ -14,7 +14,7 @@ const EditCategory = ({ close, fetchData, data: CategoryData }:{close:any,fetchD
   });
   const [loading, setLoading] = useState(false);
 
-  const handleOnChange = (e:any) => {
+  const handleOnChange = (e) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -24,7 +24,7 @@ const EditCategory = ({ close, fetchData, data: CategoryData }:{close:any,fetchD
       };
     });
   };
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {

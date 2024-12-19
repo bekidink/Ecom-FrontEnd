@@ -54,6 +54,7 @@ const Address = () => {
               className={`border rounded p-3 flex gap-3 bg-white ${
                 !address.status && "hidden"
               }`}
+              key={index}
             >
               <div className="w-full">
                 <p>{address.address_line}</p>

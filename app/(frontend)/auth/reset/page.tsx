@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import SummaryApi from "@/utils/summaryApi";
@@ -36,7 +37,7 @@ const ResetPassword = () => {
     }
   }, []);
 
-  const handleChange = (e:any) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -49,7 +50,7 @@ const ResetPassword = () => {
 
   console.log("data reset password", data);
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     ///optional

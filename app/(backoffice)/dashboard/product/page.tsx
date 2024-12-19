@@ -5,15 +5,12 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import Axios from "@/utils/Axios";
 import Loading from "@/components/custom/Loading";
 import ProductCardAdmin from "@/components/custom/ProductCardAdmin";
-import { IoSearchOutline } from "react-icons/io5";
-import EditProductAdmin from "@/components/custom/EditProductAdmin";
 
 const ProductAdmin = () => {
   const [productData, setProductData] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalPageCount, setTotalPageCount] = useState(1);
-  const [search, setSearch] = useState("");
 
   const fetchProductData = async () => {
     try {
@@ -23,7 +20,7 @@ const ProductAdmin = () => {
         data: {
           page: page,
           limit: 12,
-          search: search,
+          search: "",
         },
       });
 
@@ -55,27 +52,9 @@ const ProductAdmin = () => {
     }
   };
 
-  const handleOnChange = (e:any) => {
-    const { value } = e.target;
-    setSearch(value);
-    setPage(1);
-  };
+  
 
-  useEffect(() => {
-    let flag = true;
-
-    const interval = setTimeout(() => {
-      if (flag) {
-        fetchProductData();
-        flag = false;
-      }
-    }, 300);
-
-    return () => {
-      clearTimeout(interval);
-    };
-  }, [search]);
-
+  
   return (
     <section className="">
       <div className="p-2  bg-white shadow-md flex items-center justify-between gap-4">
@@ -99,6 +78,7 @@ const ProductAdmin = () => {
             {productData.map((p, index) => {
               return (
                 <ProductCardAdmin
+                key={index}
                   data={p}
                   fetchProductData={fetchProductData}
                 />

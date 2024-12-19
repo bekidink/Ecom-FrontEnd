@@ -12,7 +12,7 @@ import SummaryApi from "@/utils/summaryApi";
 import Axios from "@/utils/Axios";
 import { FC, useEffect } from "react";
 interface ProvidersProps {
-  children: any;
+  children: React.ReactNode;
 }
 
 export function Providers({ children }: ProvidersProps) {
@@ -37,11 +37,12 @@ export const Custom: FC<{ children: React.ReactNode }> = ({ children }) => {
       if (responseData.success) {
         dispatch(
           setAllCategory(
-            responseData.data.sort((a: { name: string; }, b: { name: any; }) => a.name.localeCompare(b.name))
+            responseData.data.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name))
           )
         );
       }
     } catch (error) {
+      console.log(error)
     } finally {
       dispatch(setLoadingCategory(false));
     }
@@ -57,11 +58,12 @@ export const Custom: FC<{ children: React.ReactNode }> = ({ children }) => {
       if (responseData.success) {
         dispatch(
           setAllSubCategory(
-            responseData.data.sort((a: { name: string; }, b: { name: any; }) => a.name.localeCompare(b.name))
+            responseData.data.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name))
           )
         );
       }
     } catch (error) {
+      console.log(error)
     } finally {
     }
   };

@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import logo from "@/assets/logo.png";
 import Search from "./Search";
 // import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -29,9 +29,7 @@ const Header = () => {
   const { totalPrice, totalQty } = useGlobalContext();
   const [openCartSection, setOpenCartSection] = useState(false);
 
-  const redirectToLoginPage = () => {
-    // navigate("/login");
-  };
+  
 
   const handleCloseUserMenu = () => {
     setOpenUserMenu(false);
