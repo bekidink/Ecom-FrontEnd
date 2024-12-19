@@ -1,4 +1,4 @@
-export const baseURL = process.env.URL ;
+export const baseURL = "https://ecom-backend-3-0ne5.onrender.com"; 
 interface ApiConfig {
   url: string;
   method: string;
