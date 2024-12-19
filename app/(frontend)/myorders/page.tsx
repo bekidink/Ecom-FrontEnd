@@ -1,10 +1,11 @@
-"use client"
+"use client";
 import React from "react";
 import { useSelector } from "react-redux";
 import NoData from "@/components/custom/NoData";
+import { RootState } from "@/store/store";
 
 const MyOrders = () => {
-  const orders = useSelector((state) => state.orders.order);
+  const orders = useSelector((state: RootState) => state.orders.order);
 
   console.log("order Items", orders);
   return (
@@ -13,7 +14,7 @@ const MyOrders = () => {
         <h1>Order</h1>
       </div>
       {!orders[0] && <NoData />}
-      {orders.map((order, index) => {
+      {orders.map((order:any, index) => {
         return (
           <div
             key={order._id + index + "order"}

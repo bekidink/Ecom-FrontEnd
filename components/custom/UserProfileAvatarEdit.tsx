@@ -6,17 +6,18 @@ import SummaryApi from "@/utils/summaryApi";
 import AxiosToastError from "@/utils/AxiosToastError";
 import { updatedAvatar } from "@/store/slices/userSlice";
 import { IoClose } from "react-icons/io5";
+import { RootState } from "@/store/store";
 
-const UserProfileAvatarEdit = ({ close }) => {
-  const user = useSelector((state) => state.user);
+const UserProfileAvatarEdit = ({ close }:any) => {
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
   };
 
-  const handleUploadAvatarImage = async (e) => {
+  const handleUploadAvatarImage = async (e:any) => {
     const file = e.target.files[0];
 
     if (!file) {

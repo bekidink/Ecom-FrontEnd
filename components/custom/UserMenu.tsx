@@ -9,11 +9,12 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import isAdmin from "@/utils/isAdmin";
 import Link from "next/link";
+import { RootState } from "@/store/store";
 
-const UserMenu = ({ close }) => {
-  const user = useSelector((state) => state.user);
+const UserMenu = ({ close }:any) => {
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-//   const navigate = useNav();
+  //   const navigate = useNav();
 
   const handleLogout = async () => {
     try {
@@ -25,7 +26,7 @@ const UserMenu = ({ close }) => {
         if (close) {
           close();
         }
-        dispatch(logout());
+        dispatch(logout(""));
         localStorage.clear();
         toast.success(response.data.message);
         // navigate("/");
@@ -120,7 +121,6 @@ const UserMenu = ({ close }) => {
             Save Address
           </Link>
         )}
-        
 
         <button
           onClick={handleLogout}

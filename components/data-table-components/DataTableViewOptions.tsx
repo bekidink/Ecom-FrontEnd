@@ -17,7 +17,7 @@ import {
 
 export default function DataTableViewOptions({
   table,
-}) {
+}:any) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -36,10 +36,10 @@ export default function DataTableViewOptions({
         {table
           .getAllColumns()
           .filter(
-            (column) =>
+            (column:any) =>
               typeof column.accessorFn !== "undefined" && column.getCanHide()
           )
-          .map((column) => {
+          .map((column:any) => {
             return (
               <DropdownMenuCheckboxItem
                 key={column.id}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { useGlobalContext } from "@/provider/GlobalProvider";
 import { DisplayPriceInRupees } from "@/utils/DisplayPriceInDolar";
@@ -9,6 +9,7 @@ import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
 import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
+import { RootState } from "@/store/store";
 // import { useRouter } from "next/router";
 
 const CheckoutPage = () => {
@@ -20,10 +21,12 @@ const CheckoutPage = () => {
     fetchOrder,
   } = useGlobalContext();
   const [openAddress, setOpenAddress] = useState(false);
-  const addressList = useSelector((state) => state.addresses.addressList);
+  const addressList:any = useSelector(
+    (state: RootState) => state.addresses.addressList
+  );
   const [selectAddress, setSelectAddress] = useState(0);
-  const cartItemsList = useSelector((state) => state.cartItem.cart);
-// const router=useRouter()
+  const cartItemsList = useSelector((state: RootState) => state.cartItem.cart);
+  // const router=useRouter()
   const handleCashOnDelivery = async () => {
     try {
       const response = await Axios({
@@ -50,7 +53,6 @@ const CheckoutPage = () => {
         //   pathname: "/success",
         //   query: { text: "Order" },
         // });
-        
       }
     } catch (error) {
       AxiosToastError(error);
@@ -94,12 +96,12 @@ const CheckoutPage = () => {
           {/***address***/}
           <h3 className="text-lg font-semibold">Choose your address</h3>
           <div className="bg-white p-2 grid gap-4">
-            {addressList.map((address, index) => {
+            {addressList.map((address:any, index:any) => {
               return (
                 <label
-                key={index}
+                  key={index}
                   htmlFor={"address" + index}
-                  className={!address.status && "hidden"}
+                  className={`${!address.status && "hidden"}`}
                 >
                   <div className="border rounded p-3 flex gap-3 hover:bg-blue-50">
                     <div>
@@ -107,7 +109,7 @@ const CheckoutPage = () => {
                         id={"address" + index}
                         type="radio"
                         value={index}
-                        onChange={(e) => setSelectAddress(e.target.value)}
+                        onChange={(e:any) => setSelectAddress(e.target.value)}
                         name="address"
                       />
                     </div>

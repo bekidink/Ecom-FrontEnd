@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -9,9 +9,10 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import toast from "react-hot-toast";
 import { setUserDetails } from "@/store/slices/userSlice";
 import fetchUserDetails from "@/utils/fetchUserDetails";
+import { RootState } from "@/store/store";
 
 const Profile = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state: RootState) => state.user);
   const [openProfileAvatarEdit, setProfileAvatarEdit] = useState(false);
   const [userData, setUserData] = useState({
     name: user.name,
@@ -29,7 +30,7 @@ const Profile = () => {
     });
   }, [user]);
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
 
     setUserData((preve) => {
@@ -40,7 +41,7 @@ const Profile = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     try {

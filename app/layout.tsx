@@ -32,11 +32,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <GlobalProvider>
-            <Custom>
-              
-              {children}
-            </Custom>
+          <GlobalProvider
+            
+          >
+            <Custom>{children}</Custom>
             <Toaster position="top-center" reverseOrder={false} />
           </GlobalProvider>
         </Providers>

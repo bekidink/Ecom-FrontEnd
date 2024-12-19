@@ -6,14 +6,14 @@ import SummaryApi from "@/utils/summaryApi";
 import toast from "react-hot-toast";
 import AxiosToastError from "@/utils/AxiosToastError";
 
-const UploadCategoryModel = ({ close, fetchData }) => {
+const UploadCategoryModel = ({ close, fetchData }:any) => {
   const [data, setData] = useState({
     name: "",
     image: "",
   });
   const [loading, setLoading] = useState(false);
 console.log(loading)
-  const handleOnChange = (e) => {
+  const handleOnChange = (e:any) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -24,7 +24,7 @@ console.log(loading)
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     try {
@@ -47,14 +47,14 @@ console.log(loading)
     }
   };
 
-  const handleUploadCategoryImage = async (e) => {
+  const handleUploadCategoryImage = async (e:any) => {
     const file = e.target.files[0];
 
     if (!file) {
       return;
     }
 
-    const response = await uploadImage(file);
+    const response:any = await uploadImage(file);
     const { data: ImageResponse } = response;
 
     setData((preve) => {

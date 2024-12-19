@@ -1,5 +1,5 @@
-"use client"
-import React, {  useState } from "react";
+"use client";
+import React, { useState } from "react";
 import logo from "@/assets/logo.png";
 import Search from "./Search";
 // import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -15,21 +15,20 @@ import DisplayCartItem from "./DisplayCartItem";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { RootState } from "@/store/store";
 
 const Header = () => {
   const isMobile = useIsMobile();
   const location = usePathname();
   const isSearchPage = location === "/search";
-  
-  const user = useSelector((state) => state?.user);
+
+  const user = useSelector((state: RootState) => state?.user);
   const [openUserMenu, setOpenUserMenu] = useState(false);
-  const cartItem = useSelector((state) => state.cartItem.cart);
+  const cartItem = useSelector((state: RootState) => state.cartItem.cart);
   // const [totalPrice,setTotalPrice] = useState(0)
   // const [totalQty,setTotalQty] = useState(0)
   const { totalPrice, totalQty } = useGlobalContext();
   const [openCartSection, setOpenCartSection] = useState(false);
-
-  
 
   const handleCloseUserMenu = () => {
     setOpenUserMenu(false);
@@ -37,7 +36,7 @@ const Header = () => {
 
   const handleMobileUser = () => {
     if (!user._id) {
-    //   navigate("/login");
+      //   navigate("/login");
       return;
     }
 
@@ -69,14 +68,14 @@ const Header = () => {
               className="h-full flex justify-center items-center"
             >
               <img
-                src={logo}
+                src={"/assets/logo.png"}
                 width={170}
                 height={60}
                 alt="logo"
                 className="hidden lg:block"
               />
               <img
-                src={logo}
+                src={"/assets/logo.png"}
                 width={120}
                 height={60}
                 alt="logo"

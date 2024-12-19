@@ -26,7 +26,7 @@ const Search = () => {
     // navigate("/search");
   };
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e:any) => {
     const value = e.target.value;
     
      router.push(`/search/${value}`);

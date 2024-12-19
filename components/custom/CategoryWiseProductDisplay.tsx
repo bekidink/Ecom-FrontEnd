@@ -1,4 +1,4 @@
-import React, { useEffect,  useState } from "react";
+import React, { useEffect, useState } from "react";
 import AxiosToastError from "@/utils/AxiosToastError";
 import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
@@ -8,12 +8,15 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { valideURLConvert } from "@/utils/valideURLConvert";
 import Link from "next/link";
+import { RootState } from "@/store/store";
 
 const CategoryWiseProductDisplay = ({ id, name }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-//   const containerRef = useRef();
-  const subCategoryData = useSelector((state) => state.product.allSubCategory);
+  //   const containerRef = useRef();
+  const subCategoryData = useSelector(
+    (state: RootState) => state.product.allSubCategory
+  );
   const loadingCardNumber = new Array(6).fill(null);
 
   const fetchCategoryWiseProduct = async () => {
@@ -66,19 +69,22 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
   };
 
   const redirectURL = handleRedirectProductListpage();
-  if(data.length===0) return null
+  if (data.length === 0) return null;
   return (
     <div>
       <div className="container mx-auto p-4 flex items-center justify-between gap-4">
         <h3 className="font-semibold text-lg md:text-xl">{name}</h3>
-        <Link href={redirectURL} className="text-green-600 hover:text-green-400">
+        <Link
+          href={redirectURL}
+          className="text-green-600 hover:text-green-400"
+        >
           See All
         </Link>
       </div>
       <div className="relative flex items-center ">
         <div
           className=" flex gap-4 md:gap-6 lg:gap-8 container mx-auto px-4 overflow-x-scroll scrollbar-none scroll-smooth"
-        //   ref={containerRef}
+          //   ref={containerRef}
         >
           {loading &&
             loadingCardNumber.map((_, index) => {

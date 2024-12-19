@@ -5,9 +5,14 @@ import Axios from "@/utils/Axios";
 import AxiosToastError from "@/utils/AxiosToastError";
 
 
-const SearchPage = ({ params: { slug} }: { params: { slug: string } }) => {
-  console.log("slug",slug)
-  const [data, setData] = useState([]);
+const SearchPage = ({
+  params: { slug },
+  
+}: {
+  params: { slug: string };
+  
+}) => {
+  const [data, setData] = useState<any>([{}]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -29,15 +34,13 @@ const SearchPage = ({ params: { slug} }: { params: { slug: string } }) => {
       if (responseData.success) {
         if (responseData.page == 1) {
           setData(responseData.data);
-          
         } else {
-          setData((preve) => {
+          setData((preve:any) => {
             return [...preve, ...responseData.data];
           });
         }
         setTotalPage(responseData.totalPage);
         console.log(responseData);
-
       }
     } catch (error) {
       setPage(1);
@@ -51,7 +54,7 @@ const SearchPage = ({ params: { slug} }: { params: { slug: string } }) => {
     fetchData();
   }, [page, searchText]);
 
-  console.log("page", page,totalPage,);
+  console.log("page", page, totalPage);
 
   // const handleFetchMore = () => {
   //   if (totalPage > page) {

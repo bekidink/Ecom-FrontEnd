@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import uploadImage from "@/utils/UploadImage";
@@ -13,7 +13,10 @@ import SummaryApi from "@/utils/summaryApi";
 import AxiosToastError from "@/utils/AxiosToastError";
 import successAlert from "@/utils/SuccessAlert";
 import { Button } from "@/components/ui/button";
-
+import { RootState } from "@/store/store";
+interface MoreDetails {
+  [key: string]: string | number; // Adjust based on the expected value types
+}
 const UploadProduct = () => {
   const [data, setData] = useState({
     name: "",
@@ -25,19 +28,25 @@ const UploadProduct = () => {
     price: "",
     discount: "",
     description: "",
-    more_details: {},
+    more_details: {
+      "":""
+    },
   });
   const [imageLoading, setImageLoading] = useState(false);
   const [ViewImageURL, setViewImageURL] = useState("");
-  const allCategory = useSelector((state) => state.product.allCategory);
+  const allCategory = useSelector(
+    (state: RootState) => state.product.allCategory
+  );
   const [selectCategory, setSelectCategory] = useState("");
   const [selectSubCategory, setSelectSubCategory] = useState("");
-  const allSubCategory = useSelector((state) => state.product.allSubCategory);
+  const allSubCategory = useSelector(
+    (state: RootState) => state.product.allSubCategory
+  );
 
   const [openAddField, setOpenAddField] = useState(false);
   const [fieldName, setFieldName] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -48,18 +57,18 @@ const UploadProduct = () => {
     });
   };
 
-  const handleUploadImage = async (e) => {
+  const handleUploadImage = async (e:any) => {
     const file = e.target.files[0];
 
     if (!file) {
       return;
     }
     setImageLoading(true);
-    const response = await uploadImage(file);
-    const { data: ImageResponse } = response;
-    const imageUrl = ImageResponse.data.url;
+    const response:any = await uploadImage(file);
+    const { data } = response;
+    const imageUrl = data.data.url;
 
-    setData((preve) => {
+    setData((preve:any) => {
       return {
         ...preve,
         image: [...preve.image, imageUrl],
@@ -68,7 +77,7 @@ const UploadProduct = () => {
     setImageLoading(false);
   };
 
-  const handleDeleteImage = async (index) => {
+  const handleDeleteImage = async (index: number) => {
     data.image.splice(index, 1);
     setData((preve) => {
       return {
@@ -77,7 +86,7 @@ const UploadProduct = () => {
     });
   };
 
-  const handleRemoveCategory = async (index) => {
+  const handleRemoveCategory = async (index: number) => {
     data.category.splice(index, 1);
     setData((preve) => {
       return {
@@ -85,7 +94,7 @@ const UploadProduct = () => {
       };
     });
   };
-  const handleRemoveSubCategory = async (index) => {
+  const handleRemoveSubCategory = async (index: number) => {
     data.subCategory.splice(index, 1);
     setData((preve) => {
       return {
@@ -108,7 +117,7 @@ const UploadProduct = () => {
     setOpenAddField(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     console.log("data", data);
 
@@ -131,7 +140,7 @@ const UploadProduct = () => {
           price: "",
           discount: "",
           description: "",
-          more_details: {},
+          more_details: {"":""},
         });
       }
     } catch (error) {
@@ -142,6 +151,7 @@ const UploadProduct = () => {
   // useEffect(()=>{
   //   successAlert("Upload successfully")
   // },[])
+  const moreDetails = data?.more_details as { [key: string]: any };
   return (
     <section className="">
       <div className="p-2   bg-white shadow-md flex items-center justify-between">
@@ -170,13 +180,13 @@ const UploadProduct = () => {
             </label>
             <textarea
               id="description"
-              type="text"
+              
               placeholder="Enter product description"
               name="description"
               value={data.description}
               onChange={handleChange}
               required
-              multiple
+              
               rows={3}
               className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded resize-none"
             />
@@ -241,9 +251,9 @@ const UploadProduct = () => {
                   value={selectCategory}
                   onChange={(e) => {
                     const value = e.target.value;
-                    const category = allCategory.find((el) => el._id === value);
+                    const category = allCategory.find((el:any) => el._id === value);
 
-                    setData((preve) => {
+                    setData((preve:any) => {
                       return {
                         ...preve,
                         category: [...preve.category, category],
@@ -253,12 +263,16 @@ const UploadProduct = () => {
                   }}
                 >
                   <option value={""}>Select Category</option>
-                  {allCategory.map((c, index) => {
-                    return <option key={index} value={c?._id}>{c.name}</option>;
+                  {allCategory.map((c:any, index) => {
+                    return (
+                      <option key={index} value={c?._id}>
+                        {c.name}
+                      </option>
+                    );
                   })}
                 </select>
                 <div className="flex flex-wrap gap-3">
-                  {data.category.map((c, index) => {
+                  {data.category.map((c:any, index) => {
                     return (
                       <div
                         key={c._id + index + "productsection"}
@@ -286,10 +300,10 @@ const UploadProduct = () => {
                   onChange={(e) => {
                     const value = e.target.value;
                     const subCategory = allSubCategory.find(
-                      (el) => el._id === value
+                      (el:any) => el._id === value
                     );
 
-                    setData((preve) => {
+                    setData((preve:any) => {
                       return {
                         ...preve,
                         subCategory: [...preve.subCategory, subCategory],
@@ -301,12 +315,16 @@ const UploadProduct = () => {
                   <option value={""} className="text-neutral-600">
                     Select Sub Category
                   </option>
-                  {allSubCategory.map((c, index) => {
-                    return <option key={index} value={c?._id}>{c.name}</option>;
+                  {allSubCategory.map((c:any, index) => {
+                    return (
+                      <option key={index} value={c?._id}>
+                        {c.name}
+                      </option>
+                    );
                   })}
                 </select>
                 <div className="flex flex-wrap gap-3">
-                  {data.subCategory.map((c, index) => {
+                  {data.subCategory.map((c:any, index) => {
                     return (
                       <div
                         key={c._id + index + "productsection"}
@@ -393,7 +411,8 @@ const UploadProduct = () => {
 
           {/**add more field**/}
           <div className="grid grid-cols-4 gap-4">
-            {Object?.keys(data?.more_details)?.map((k, index) => {
+
+            {Object.keys(data?.more_details).map((k, index) => {
               return (
                 <div className="grid gap-1" key={index}>
                   <label htmlFor={k} className="font-medium">
@@ -402,7 +421,7 @@ const UploadProduct = () => {
                   <input
                     id={k}
                     type="text"
-                    value={data?.more_details[k]}
+                    value={moreDetails[k]}
                     onChange={(e) => {
                       const value = e.target.value;
                       setData((preve) => {
@@ -444,7 +463,7 @@ const UploadProduct = () => {
       {openAddField && (
         <AddFieldComponent
           value={fieldName}
-          onChange={(e) => setFieldName(e.target.value)}
+          onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setFieldName(e.target.value)}
           submit={handleAddField}
           close={() => setOpenAddField(false)}
         />

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
@@ -9,21 +9,27 @@ import { useSelector } from "react-redux";
 import { valideURLConvert } from "@/utils/valideURLConvert";
 import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
-const ProductListPage = ({ params: { id } }) => {
+import { RootState } from "@/store/store";
+
+const ProductListPage = ({
+  params: { slug },
+  
+}: {
+  params: { slug: string };
+}) => {
   const [data, setData] = useState([]);
   // const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [totalPage, setTotalPage] = useState(1);
-  const AllSubCategory = useSelector((state) => state.product.allSubCategory);
+  const AllSubCategory = useSelector(
+    (state: RootState) => state.product.allSubCategory
+  );
   const [DisplaySubCatory, setDisplaySubCategory] = useState([]);
 
-  
-  
-  const CategoryParms = id.split("_");
-  const categoryParams = CategoryParms[0]
+  const CategoryParms = slug.split("_");
+  const categoryParams = CategoryParms[0];
   const subCategoryParams = CategoryParms[1];
-  console.log("category",CategoryParms,totalPage);
-  const subCategory=CategoryParms[1].split("-")
+  console.log("category", CategoryParms);
+  const subCategory = CategoryParms[1].split("-");
   const subCategoryName = subCategory
     ?.slice(0, subCategory?.length - 1)
     ?.join(" ");
@@ -44,9 +50,7 @@ const ProductListPage = ({ params: { id } }) => {
       //     limit: 8,
       //   },
       // });
-
       // const { data: responseData } = response;
-
       // if (responseData.success) {
       //   if (responseData.page == 1) {
       //     setData(responseData.data);
@@ -67,22 +71,22 @@ const ProductListPage = ({ params: { id } }) => {
   }, []);
 
   useEffect(() => {
-    const sub = AllSubCategory.filter((s) => {
-      const filterData = s.category.some((el) => {
+    const sub = AllSubCategory.filter((s: any) => {
+      const filterData = s.category.some((el: any) => {
         return el._id == categoryId;
       });
 
       return filterData ? filterData : null;
     });
     setDisplaySubCategory(sub);
-  }, [id, AllSubCategory]);
+  }, [AllSubCategory]);
 
   return (
     <section className="sticky top-24 lg:top-20">
       <div className="container sticky top-24  mx-auto grid grid-cols-[90px,1fr]  md:grid-cols-[200px,1fr] lg:grid-cols-[280px,1fr]">
         {/**sub category **/}
         <ScrollArea className="min-h-[88vh] max-h-[88vh] rounded-md border">
-          {DisplaySubCatory.map((s, index) => {
+          {DisplaySubCatory.map((s: any, index) => {
             const link = `/category/${valideURLConvert(s?.category[0]?.name)}-${
               s?.category[0]?._id
             }_${valideURLConvert(s.name)}-${s._id}`;
@@ -145,7 +149,7 @@ const ProductListPage = ({ params: { id } }) => {
           <div>
             <div className="min-h-[80vh] max-h-[80vh] overflow-y-auto relative">
               <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 ">
-                {data.map((p, index) => {
+                {data.map((p: any, index) => {
                   return (
                     <CardProduct
                       data={p}

@@ -10,17 +10,30 @@ import Divider from "@/components/custom/Divider";
 import { pricewithDiscount } from "@/utils/PriceWithDiscount";
 import AddToCartButton from "@/components/custom/AddToCartButton";
 
-const ProductDisplayPage = ({ params }) => {
-
-  const productId = params.slug.split("-")?.slice(-1)[0];
+const ProductDisplayPage = ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
+  const productId = slug.split("-")?.slice(-1)[0];
   const [data, setData] = useState({
     name: "",
     image: [],
+    category: [],
+    subCategory: [],
+    unit: "",
+    stock: 0,
+    price: "",
+    discount: 0,
+    description: "",
+    more_details: {
+      "": "",
+    },
   });
   const [image, setImage] = useState(0);
   const [loading, setLoading] = useState(false);
-//   const imageContainer = useRef();
-console.log(loading)
+  //   const imageContainer = useRef();
+  console.log(loading);
   const fetchProductDetails = async () => {
     try {
       const response = await Axios({
@@ -44,7 +57,7 @@ console.log(loading)
 
   useEffect(() => {
     fetchProductDetails();
-  }, [params]);
+  }, [slug]);
 
   const handleScrollRight = () => {
     // imageContainer.current.scrollLeft += 100;
@@ -53,6 +66,7 @@ console.log(loading)
     // imageContainer.current.scrollLeft -= 100;
   };
   console.log("product data", data);
+  const moreDetails = data?.more_details as { [key: string]: any };
   return (
     <section className="container mx-auto p-4 grid lg:grid-cols-2 ">
       <div className="">
@@ -126,7 +140,7 @@ console.log(loading)
               return (
                 <div key={index}>
                   <p className="font-semibold">{element}</p>
-                  <p className="text-base">{data?.more_details[element]}</p>
+                  <p className="text-base">{moreDetails[element]}</p>
                 </div>
               );
             })}
@@ -230,7 +244,7 @@ console.log(loading)
               return (
                 <div key={index}>
                   <p className="font-semibold">{element}</p>
-                  <p className="text-base">{data?.more_details[element]}</p>
+                  <p className="text-base">{moreDetails[element]}</p>
                 </div>
               );
             })}

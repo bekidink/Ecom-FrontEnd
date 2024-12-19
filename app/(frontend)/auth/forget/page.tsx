@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     email: "",
   });
 //   const navigate = useNavigate();
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
 
   const valideValue = Object.values(data).every((el) => el);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     try {

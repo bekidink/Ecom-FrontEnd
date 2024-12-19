@@ -6,16 +6,19 @@ import Axios from "@/utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
 import toast from "react-hot-toast";
 import AxiosToastError from "@/utils/AxiosToastError";
+import { RootState } from "@/store/store";
 
-const UploadSubCategoryModel = ({ close, fetchData }) => {
+const UploadSubCategoryModel = ({ close, fetchData }:any) => {
   const [subCategoryData, setSubCategoryData] = useState({
     name: "",
     image: "",
     category: [],
   });
-  const allCategory = useSelector((state) => state.product.allCategory);
+  const allCategory = useSelector(
+    (state: RootState) => state.product.allCategory
+  );
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
 
     setSubCategoryData((preve) => {
@@ -26,14 +29,14 @@ const UploadSubCategoryModel = ({ close, fetchData }) => {
     });
   };
 
-  const handleUploadSubCategoryImage = async (e) => {
+  const handleUploadSubCategoryImage = async (e:any) => {
     const file = e.target.files[0];
 
     if (!file) {
       return;
     }
 
-    const response = await uploadImage(file);
+    const response:any = await uploadImage(file);
     const { data: ImageResponse } = response;
 
     setSubCategoryData((preve) => {
@@ -44,9 +47,9 @@ const UploadSubCategoryModel = ({ close, fetchData }) => {
     });
   };
 
-  const handleRemoveCategorySelected = (categoryId) => {
+  const handleRemoveCategorySelected = (categoryId:any) => {
     const index = subCategoryData.category.findIndex(
-      (el) => el._id === categoryId
+      (el:any) => el._id === categoryId
     );
     subCategoryData.category.splice(index, 1);
     setSubCategoryData((preve) => {
@@ -56,7 +59,7 @@ const UploadSubCategoryModel = ({ close, fetchData }) => {
     });
   };
 
-  const handleSubmitSubCategory = async (e) => {
+  const handleSubmitSubCategory = async (e:any) => {
     e.preventDefault();
 
     try {
@@ -134,10 +137,10 @@ const UploadSubCategoryModel = ({ close, fetchData }) => {
             <div className="border focus-within:border-primary-200 rounded">
               {/*display value**/}
               <div className="flex flex-wrap gap-2">
-                {subCategoryData.category.map((cat, index) => {
+                {subCategoryData.category.map((cat:any, index) => {
                   return (
                     <p
-                      key={cat._id +index + "selectedValue"}
+                      key={cat._id + index + "selectedValue"}
                       className="bg-white shadow-md px-1 m-1 flex items-center gap-2"
                     >
                       {cat.name}
@@ -158,10 +161,10 @@ const UploadSubCategoryModel = ({ close, fetchData }) => {
                 onChange={(e) => {
                   const value = e.target.value;
                   const categoryDetails = allCategory.find(
-                    (el) => el._id == value
+                    (el:any) => el._id == value
                   );
 
-                  setSubCategoryData((preve) => {
+                  setSubCategoryData((preve:any) => {
                     return {
                       ...preve,
                       category: [...preve.category, categoryDetails],
@@ -170,11 +173,11 @@ const UploadSubCategoryModel = ({ close, fetchData }) => {
                 }}
               >
                 <option value={""}>Select Category</option>
-                {allCategory.map((category, index) => {
+                {allCategory.map((category:any, index) => {
                   return (
                     <option
                       value={category?._id}
-                      key={category._id +index + "subcategory"}
+                      key={category._id + index + "subcategory"}
                     >
                       {category?.name}
                     </option>

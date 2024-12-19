@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { IoClose } from "react-icons/io5";
 import { useGlobalContext } from "@/provider/GlobalProvider";
@@ -11,13 +11,14 @@ import imageEmpty from "@/assets/empty_cart.webp";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { RootState } from "@/store/store";
 
-const DisplayCartItem = ({ close }) => {
+const DisplayCartItem = ({ close }:any) => {
   const { notDiscountTotalPrice, totalPrice, totalQty } = useGlobalContext();
-  const cartItem = useSelector((state) => state.cartItem.cart);
-  const user = useSelector((state) => state.user);
-//   const navigate = useNavigate();
-const router=useRouter()
+  const cartItem = useSelector((state: RootState) => state.cartItem.cart);
+  const user = useSelector((state: RootState) => state.user);
+  //   const navigate = useNavigate();
+  const router = useRouter();
   const redirectToCheckoutPage = () => {
     if (user?._id) {
       router.push("/checkout");
@@ -116,7 +117,7 @@ const router=useRouter()
           ) : (
             <div className="bg-white flex flex-col justify-center items-center">
               <img
-                src={imageEmpty}
+                src={"/assets/empty_cart.webp"}
                 className="w-full h-full object-scale-down"
               />
               <Link

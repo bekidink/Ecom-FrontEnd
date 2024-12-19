@@ -10,10 +10,17 @@ import { useRouter } from "next/navigation";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { RootState } from "@/store/store";
 const Home = () => {
-  const loadingCategory = useSelector((state) => state.product.loadingCategory);
-  const categoryData = useSelector((state) => state.product.allCategory);
-  const subCategoryData = useSelector((state) => state.product.allSubCategory);
+  const loadingCategory = useSelector(
+    (state: RootState) => state.product.loadingCategory
+  );
+  const categoryData = useSelector(
+    (state: RootState) => state.product.allCategory
+  );
+  const subCategoryData = useSelector(
+    (state: RootState) => state.product.allSubCategory
+  );
   // const navigate = useNavigate();
   const router = useRouter();
   const handleRedirectProductListpage = (id, cat) => {

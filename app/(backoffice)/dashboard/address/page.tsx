@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AddAddress from "@/components/custom/AddAddress";
@@ -10,15 +10,18 @@ import SummaryApi from "@/utils/summaryApi";
 import toast from "react-hot-toast";
 import AxiosToastError from "@/utils/AxiosToastError";
 import { useGlobalContext } from "@/provider/GlobalProvider";
+import { RootState } from "@/store/store";
 
 const Address = () => {
-  const addressList = useSelector((state) => state.addresses.addressList);
+  const addressList = useSelector(
+    (state: RootState) => state.addresses.addressList
+  );
   const [openAddress, setOpenAddress] = useState(false);
   const [OpenEdit, setOpenEdit] = useState(false);
   const [editData, setEditData] = useState({});
   const { fetchAddress } = useGlobalContext();
 
-  const handleDisableAddress = async (id) => {
+  const handleDisableAddress = async (id: any) => {
     try {
       const response = await Axios({
         ...SummaryApi.disableAddress,
@@ -48,7 +51,7 @@ const Address = () => {
         </button>
       </div>
       <div className="bg-blue-50 p-2 grid gap-4">
-        {addressList.map((address, index) => {
+        {addressList.map((address:any, index) => {
           return (
             <div
               className={`border rounded p-3 flex gap-3 bg-white ${

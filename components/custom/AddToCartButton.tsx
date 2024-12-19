@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "@/provider/GlobalProvider";
 import Axios from "@/utils/Axios";
@@ -8,16 +8,17 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import Loading from "./Loading";
 import { useSelector } from "react-redux";
 import { FaMinus, FaPlus } from "react-icons/fa6";
+import { RootState } from "@/store/store";
 
-const AddToCartButton = ({ data }) => {
+const AddToCartButton = ({ data }:any) => {
   const { fetchCartItem, updateCartItem, deleteCartItem } = useGlobalContext();
   const [loading, setLoading] = useState(false);
-  const cartItem = useSelector((state) => state.cartItem.cart);
+  const cartItem = useSelector((state: RootState) => state.cartItem.cart);
   const [isAvailableCart, setIsAvailableCart] = useState(false);
   const [qty, setQty] = useState(0);
-  const [cartItemDetails, setCartItemsDetails] = useState();
+  const [cartItemDetails, setCartItemsDetails] = useState({_id:""});
 
-  const handleADDTocart = async (e) => {
+  const handleADDTocart = async (e:any) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -53,12 +54,15 @@ const AddToCartButton = ({ data }) => {
     );
     setIsAvailableCart(checkingitem);
 
-    const product = cartItem.find((item) => item.productId._id === data._id);
-    setQty(product?.quantity);
-    setCartItemsDetails(product);
+    const product:any = cartItem.find((item) => item.productId._id === data._id);
+    if(product){
+  setQty(product?.quantity ?? 0);
+  setCartItemsDetails(product);
+    }
+  
   }, [data, cartItem]);
 
-  const increaseQty = async (e) => {
+  const increaseQty = async (e:any) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -69,7 +73,7 @@ const AddToCartButton = ({ data }) => {
     }
   };
 
-  const decreaseQty = async (e) => {
+  const decreaseQty = async (e:any) => {
     e.preventDefault();
     e.stopPropagation();
     if (qty === 1) {

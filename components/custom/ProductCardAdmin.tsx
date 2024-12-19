@@ -7,7 +7,7 @@ import Axios from "@/utils/Axios";
 import AxiosToastError from "@/utils/AxiosToastError";
 import toast from "react-hot-toast";
 
-const ProductCardAdmin = ({ data, fetchProductData }) => {
+const ProductCardAdmin = ({ data, fetchProductData }:any) => {
   const [editOpen, setEditOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 

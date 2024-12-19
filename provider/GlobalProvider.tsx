@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import Axios from "../utils/Axios";
 import SummaryApi from "@/utils/summaryApi";
@@ -9,18 +9,37 @@ import toast from "react-hot-toast";
 import { pricewithDiscount } from "@/utils/PriceWithDiscount";
 import { handleAddAddress } from "@/store/slices/addressSlice";
 import { setOrder } from "@/store/slices/orderSlice";
+import { RootState } from "@/store/store";
+interface GlobalContextType {
+  fetchCartItem: () => Promise<void>;
+  updateCartItem: (id: string, qty: number) => Promise<any>;
+  deleteCartItem: (cartId: string) => Promise<void>;
+  fetchAddress: () => Promise<void>;
+  fetchOrder: () => Promise<void>;
+  totalPrice: number;
+  totalQty: number;
+  notDiscountTotalPrice: number;
+}
 
-export const GlobalContext = createContext(null);
+export const GlobalContext = createContext<GlobalContextType | undefined>(
+  undefined
+);
 
-export const useGlobalContext = () => useContext(GlobalContext);
+export const useGlobalContext = () => {
+  const context = useContext(GlobalContext);
+  if (!context) {
+    throw new Error("useGlobalContext must be used within a GlobalProvider");
+  }
+  return context;
+};
 
 const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
   const [notDiscountTotalPrice, setNotDiscountTotalPrice] = useState(0);
   const [totalQty, setTotalQty] = useState(0);
-  const cartItem = useSelector((state) => state.cartItem.cart);
-  const user = useSelector((state) => state?.user);
+  const cartItem = useSelector((state: RootState) => state.cartItem.cart);
+  const user = useSelector((state: RootState) => state?.user);
 
   const fetchCartItem = async () => {
     try {
@@ -38,7 +57,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const updateCartItem = async (id, qty) => {
+  const updateCartItem = async (id: any, qty: any) => {
     try {
       const response = await Axios({
         ...SummaryApi.updateCartItemQty,
@@ -59,7 +78,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
       return error;
     }
   };
-  const deleteCartItem = async (cartId) => {
+  const deleteCartItem = async (cartId: any) => {
     try {
       const response = await Axios({
         ...SummaryApi.deleteCartItem,

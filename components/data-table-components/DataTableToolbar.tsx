@@ -12,12 +12,12 @@ import { Cross2Icon } from "@radix-ui/react-icons"
 
 export default function DataTableToolbar({
   table,filterKeys
-}) {
+}:any) {
     const isFiltered = filterKeys.some(
-        (key) => table.getState().columnFilters[key]?.length > 0
+        (key:any) => table.getState().columnFilters[key]?.length > 0
       );
     
-      const handleInputChange = (key, value) => {
+      const handleInputChange = (key:any, value:any) => {
         table.getColumn(key)?.setFilterValue(value);
       };
     
@@ -29,7 +29,7 @@ export default function DataTableToolbar({
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
-      {filterKeys.map((key) => (
+      {filterKeys.map((key:any) => (
           <Input
             key={key}
             placeholder={`Filter ${key}...`}

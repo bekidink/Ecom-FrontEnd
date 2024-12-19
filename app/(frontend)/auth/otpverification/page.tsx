@@ -20,7 +20,7 @@ const OtpVerification = () => {
 
   const valideValue = data.every((el) => el);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     try {
@@ -74,7 +74,7 @@ const OtpVerification = () => {
                     //   return ref;
                     // }}
                     value={data[index]}
-                    onChange={(e) => {
+                    onChange={(e:any) => {
                       const value = e.target.value;
                       console.log("value", value);
 
@@ -83,7 +83,7 @@ const OtpVerification = () => {
                       setData(newData);
 
                       if (value && index < 5) {
-                        inputRef.current[index + 1].focus();
+                        // inputRef.current[index + 1].focus();
                       }
                     }}
                     maxLength={1}

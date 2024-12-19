@@ -1,17 +1,13 @@
 "use client";
 import {
-  
   Bell,
-  AlignJustify ,
+  AlignJustify,
   Home,
   Mail,
   ChartBarStacked,
   Layers,
-
-  Plus ,
-  
+  Plus,
   User2,
-  
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -26,61 +22,62 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export default function Sidebar() {
   //   const categories = (await getCategories()) || [];
-  const user = useSelector((state) => state?.user);
+  const user = useSelector((state: RootState) => state?.user);
   const pathname = usePathname();
-  const role=user.role
-const roles = {
-  USER: [
-    {
-      name: "Address",
-      path: "/dashboard/address",
-      icon: Home,
-    },
+  const role = user.role;
+  const roles:any = {
+    USER: [
+      {
+        name: "Address",
+        path: "/dashboard/address",
+        icon: Home,
+      },
 
-    {
-      name: "My Orders",
-      path: "/dashboard/myorders",
-      icon: Mail,
-    },
+      {
+        name: "My Orders",
+        path: "/dashboard/myorders",
+        icon: Mail,
+      },
 
-    {
-      name: "Profile",
-      path: "/dashboard/profile",
-      icon: User2,
-    },
-  ],
-  ADMIN: [
-    {
-      name: "Category",
-      path: "/dashboard/category",
-      icon: ChartBarStacked,
-    },
-    {
-      name: "Sub Category",
-      path: "/dashboard/subcategory",
-      icon: Layers,
-    },
-    {
-      name: "Product",
-      path: "/dashboard/product",
-      icon: AlignJustify,
-    },
-    {
-      name: "Add Product",
-      path: "/dashboard/upload-product",
-      icon: Plus,
-    },
+      {
+        name: "Profile",
+        path: "/dashboard/profile",
+        icon: User2,
+      },
+    ],
+    ADMIN: [
+      {
+        name: "Category",
+        path: "/dashboard/category",
+        icon: ChartBarStacked,
+      },
+      {
+        name: "Sub Category",
+        path: "/dashboard/subcategory",
+        icon: Layers,
+      },
+      {
+        name: "Product",
+        path: "/dashboard/product",
+        icon: AlignJustify,
+      },
+      {
+        name: "Add Product",
+        path: "/dashboard/upload-product",
+        icon: Plus,
+      },
 
-    {
-      name: "Profile",
-      path: "/dashboard/profile",
-      icon: User2,
-    },
-  ],
-};
+      {
+        name: "Profile",
+        path: "/dashboard/profile",
+        icon: User2,
+      },
+    ],
+  };
   const sidebarLinks = role ? roles[role] : [];
   // const sidebarLinks = [
   //   {
@@ -120,10 +117,9 @@ const roles = {
   //     icon: Mail,
   //   },
   // ];
-    
-  
+
   const router = useRouter();
-  
+
   async function handleLogout() {
     router.push("/");
   }
@@ -142,7 +138,7 @@ const roles = {
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            {sidebarLinks.map((item, i) => {
+            {sidebarLinks.map((item:any, i:any) => {
               const Icon = item.icon;
               return (
                 <Link

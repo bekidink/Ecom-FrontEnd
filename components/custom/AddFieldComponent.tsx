@@ -1,7 +1,7 @@
 import React from 'react'
 import { IoClose } from "react-icons/io5";
 
-const AddFieldComponent = ({close,value,onChange,submit}) => {
+const AddFieldComponent = ({close,value,onChange,submit}:any) => {
   return (
    <section className='fixed top-0 bottom-0 right-0 left-0 bg-neutral-900 bg-opacity-70 z-50 flex justify-center items-center p-4'>
         <div className='bg-white rounded p-4 w-full max-w-md'>

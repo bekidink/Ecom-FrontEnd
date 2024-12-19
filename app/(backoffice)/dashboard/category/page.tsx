@@ -84,7 +84,7 @@ const CategoryPage = () => {
       {!categoryData[0] && !loading && <NoData />}
 
       <div className="p-4 grid  grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-16">
-        {categoryData.map((category, index) => {
+        {categoryData.map((category:any, index) => {
           return (
             <div className="w-40 h-56 rounded shadow-lg" key={index}>
               <img

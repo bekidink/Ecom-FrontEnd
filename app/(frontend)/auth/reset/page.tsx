@@ -37,7 +37,7 @@ const ResetPassword = () => {
     }
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -50,7 +50,7 @@ const ResetPassword = () => {
 
   console.log("data reset password", data);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     ///optional

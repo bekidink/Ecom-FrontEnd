@@ -56,7 +56,7 @@ const SubCategoryPage = () => {
     }),
     columnHelper.accessor("image", {
       header: "Image",
-      cell: ({ row }) => {
+      cell: ({ row }:any) => {
         console.log("row");
         return (
           <div className="flex justify-center items-center">
@@ -74,10 +74,10 @@ const SubCategoryPage = () => {
     }),
     columnHelper.accessor("category", {
       header: "Category",
-      cell: ({ row }) => {
+      cell: ({ row }:any) => {
         return (
           <>
-            {row.original.category.map((c, index) => {
+            {row.original.category.map((c: { name: string | number | bigint | boolean | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined> | null | undefined; }, index: string) => {
               return (
                 <p
                   key={index + "table"}
@@ -93,7 +93,7 @@ const SubCategoryPage = () => {
     }),
     columnHelper.accessor("_id", {
       header: "Action",
-      cell: ({ row }) => {
+      cell: ({ row }:any) => {
         return (
           <div className="flex items-center justify-center gap-3">
             <button

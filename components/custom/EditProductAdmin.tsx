@@ -13,8 +13,9 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import successAlert from "@/utils/SuccessAlert";
 
 import { Button } from "../ui/button";
+import { RootState } from "@/store/store";
 
-const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
+const EditProductAdmin = ({ close, data: propsData, fetchProductData }:any) => {
   const [data, setData] = useState({
     _id: propsData._id,
     name: propsData.name,
@@ -30,15 +31,19 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
   });
   const [imageLoading, setImageLoading] = useState(false);
   const [ViewImageURL, setViewImageURL] = useState("");
-  const allCategory = useSelector((state) => state.product.allCategory);
+  const allCategory = useSelector(
+    (state: RootState) => state.product.allCategory
+  );
   const [selectCategory, setSelectCategory] = useState("");
   const [selectSubCategory, setSelectSubCategory] = useState("");
-  const allSubCategory = useSelector((state) => state.product.allSubCategory);
+  const allSubCategory = useSelector(
+    (state: RootState) => state.product.allSubCategory
+  );
 
   const [openAddField, setOpenAddField] = useState(false);
   const [fieldName, setFieldName] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -49,14 +54,14 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
     });
   };
 
-  const handleUploadImage = async (e) => {
+  const handleUploadImage = async (e:any) => {
     const file = e.target.files[0];
 
     if (!file) {
       return;
     }
     setImageLoading(true);
-    const response = await uploadImage(file);
+    const response:any = await uploadImage(file);
     const { data: ImageResponse } = response;
     const imageUrl = ImageResponse.data.url;
 
@@ -69,7 +74,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
     setImageLoading(false);
   };
 
-  const handleDeleteImage = async (index) => {
+  const handleDeleteImage = async (index:any) => {
     data.image.splice(index, 1);
     setData((preve) => {
       return {
@@ -78,7 +83,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
     });
   };
 
-  const handleRemoveCategory = async (index) => {
+  const handleRemoveCategory = async (index:any) => {
     data.category.splice(index, 1);
     setData((preve) => {
       return {
@@ -86,7 +91,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
       };
     });
   };
-  const handleRemoveSubCategory = async (index) => {
+  const handleRemoveSubCategory = async (index:any) => {
     data.subCategory.splice(index, 1);
     setData((preve) => {
       return {
@@ -109,7 +114,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
     setOpenAddField(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     console.log("data", data);
 
@@ -126,18 +131,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
           close();
         }
         fetchProductData();
-        setData({
-          name: "",
-          image: [],
-          category: [],
-          subCategory: [],
-          unit: "",
-          stock: "",
-          price: "",
-          discount: "",
-          description: "",
-          more_details: {},
-        });
+        // setData(null);
       }
     } catch (error) {
       AxiosToastError(error);
@@ -177,13 +171,13 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                 </label>
                 <textarea
                   id="description"
-                  type="text"
+                  
                   placeholder="Enter product description"
                   name="description"
                   value={data.description}
                   onChange={handleChange}
                   required
-                  multiple
+                  
                   rows={3}
                   className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded resize-none"
                 />
@@ -215,7 +209,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                   </label>
                   {/**display uploded image*/}
                   <div className="flex flex-wrap gap-4">
-                    {data.image.map((img, index) => {
+                    {data.image.map((img:any, index:any) => {
                       return (
                         <div
                           key={img + index}
@@ -248,7 +242,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                     onChange={(e) => {
                       const value = e.target.value;
                       const category = allCategory.find(
-                        (el) => el._id === value
+                        (el:any) => el._id === value
                       );
 
                       setData((preve) => {
@@ -261,12 +255,16 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                     }}
                   >
                     <option value={""}>Select Category</option>
-                    {allCategory.map((c, index) => {
-                      return <option key={index} value={c?._id}>{c.name}</option>;
+                    {allCategory.map((c:any, index) => {
+                      return (
+                        <option key={index} value={c?._id}>
+                          {c.name}
+                        </option>
+                      );
                     })}
                   </select>
                   <div className="flex flex-wrap gap-3">
-                    {data.category.map((c, index) => {
+                    {data.category.map((c:any, index:any) => {
                       return (
                         <div
                           key={c._id + index + "productsection"}
@@ -294,7 +292,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                     onChange={(e) => {
                       const value = e.target.value;
                       const subCategory = allSubCategory.find(
-                        (el) => el._id === value
+                        (el:any) => el._id === value
                       );
 
                       setData((preve) => {
@@ -309,12 +307,16 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                     <option value={""} className="text-neutral-600">
                       Select Sub Category
                     </option>
-                    {allSubCategory.map((c, index) => {
-                      return <option key={index} value={c?._id}>{c.name}</option>;
+                    {allSubCategory.map((c:any, index) => {
+                      return (
+                        <option key={index} value={c?._id}>
+                          {c.name}
+                        </option>
+                      );
                     })}
                   </select>
                   <div className="flex flex-wrap gap-3">
-                    {data.subCategory.map((c, index) => {
+                    {data.subCategory.map((c:any, index:any) => {
                       return (
                         <div
                           key={c._id + index + "productsection"}
@@ -449,7 +451,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
           {openAddField && (
             <AddFieldComponent
               value={fieldName}
-              onChange={(e) => setFieldName(e.target.value)}
+              onChange={(e:any) => setFieldName(e.target.value)}
               submit={handleAddField}
               close={() => setOpenAddField(false)}
             />

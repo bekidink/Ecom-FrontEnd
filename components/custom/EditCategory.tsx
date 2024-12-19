@@ -6,7 +6,7 @@ import SummaryApi from "@/utils/summaryApi";
 import toast from "react-hot-toast";
 import AxiosToastError from "@/utils/AxiosToastError";
 
-const EditCategory = ({ close, fetchData, data: CategoryData }) => {
+const EditCategory = ({ close, fetchData, data: CategoryData }:any) => {
   const [data, setData] = useState({
     _id: CategoryData._id,
     name: CategoryData.name,
@@ -14,7 +14,7 @@ const EditCategory = ({ close, fetchData, data: CategoryData }) => {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e:any) => {
     const { name, value } = e.target;
 
     setData((preve) => {
@@ -24,7 +24,7 @@ const EditCategory = ({ close, fetchData, data: CategoryData }) => {
       };
     });
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     try {
@@ -46,14 +46,14 @@ const EditCategory = ({ close, fetchData, data: CategoryData }) => {
       setLoading(false);
     }
   };
-  const handleUploadCategoryImage = async (e) => {
+  const handleUploadCategoryImage = async (e:any) => {
     const file = e.target.files[0];
 
     if (!file) {
       return;
     }
     setLoading(true);
-    const response = await uploadImage(file);
+    const response:any = await uploadImage(file);
     const { data: ImageResponse } = response;
     setLoading(false);
 
