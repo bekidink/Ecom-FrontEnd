@@ -25,17 +25,17 @@ const ProductListPage = ({
   );
   const [DisplaySubCatory, setDisplaySubCategory] = useState([]);
 
-  const CategoryParms = slug.split("_");
+  const CategoryParms = slug.split("#");
   const categoryParams = CategoryParms[0];
   const subCategoryParams = CategoryParms[1];
   console.log("category", CategoryParms);
-  const subCategory = CategoryParms[1].split("-");
+  const subCategory = CategoryParms[1].split("&");
   const subCategoryName = subCategory
     ?.slice(0, subCategory?.length - 1)
     ?.join(" ");
 
-  const categoryId = categoryParams.split("-").slice(-1)[0];
-  const subCategoryId = subCategoryParams.split("-").slice(-1)[0];
+  const categoryId = categoryParams.split("&").slice(-1)[0];
+  const subCategoryId = subCategoryParams.split("&").slice(-1)[0];
 
   const fetchProductdata = async () => {
     try {
