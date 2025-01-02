@@ -24,41 +24,41 @@ const ProductListPage = ({
     (state: RootState) => state.product.allSubCategory
   );
   const [DisplaySubCatory, setDisplaySubCategory] = useState([]);
-
-  const CategoryParms = slug.split("#");
+  console.log("slug", slug);
+  const CategoryParms = slug.split("%24");
   const categoryParams = CategoryParms[0];
   const subCategoryParams = CategoryParms[1];
   console.log("category", CategoryParms);
-  const subCategory = CategoryParms[1].split("&");
+  const subCategory = CategoryParms[1].split("_");
   const subCategoryName = subCategory
     ?.slice(0, subCategory?.length - 1)
     ?.join(" ");
 
-  const categoryId = categoryParams.split("&").slice(-1)[0];
-  const subCategoryId = subCategoryParams.split("&").slice(-1)[0];
+  const categoryId = categoryParams.split("_").slice(-1)[0];
+  const subCategoryId = subCategoryParams.split("_").slice(-1)[0];
 
   const fetchProductdata = async () => {
     try {
-      // setLoading(true);
-      // const response = await Axios({
-      //   url: SummaryApi.getProductByCategoryAndSubCategory.url,
-      //   method: SummaryApi.getProductByCategoryAndSubCategory.method,
-      //   data: {
-      //     categoryId: categoryId,
-      //     subCategoryId: subCategoryId,
-      //     page: "1",
-      //     limit: 8,
-      //   },
-      // });
-      // const { data: responseData } = response;
-      // if (responseData.success) {
-      //   if (responseData.page == 1) {
-      //     setData(responseData.data);
-      //   } else {
-      //     setData([...data, ...responseData.data]);
-      //   }
-      //   setTotalPage(responseData.totalCount);
-      // }
+      setLoading(true);
+      const response = await Axios({
+        url: SummaryApi.getProductByCategoryAndSubCategory.url,
+        method: SummaryApi.getProductByCategoryAndSubCategory.method,
+        data: {
+          categoryId: categoryId,
+          subCategoryId: subCategoryId,
+          page: "1",
+          limit: 8,
+        },
+      });
+      const { data: responseData } = response;
+      if (responseData.success) {
+        if (responseData.page == 1) {
+          setData(responseData.data);
+        } else {
+          // setData([...data, ...responseData.data]);
+        }
+        // setTotalPage(responseData.totalCount);
+      }
     } catch (error) {
       AxiosToastError(error);
     } finally {
@@ -87,9 +87,9 @@ const ProductListPage = ({
         {/**sub category **/}
         <ScrollArea className="min-h-[88vh] max-h-[88vh] rounded-md border">
           {DisplaySubCatory.map((s: any, index) => {
-            const link = `/category/${valideURLConvert(s?.category[0]?.name)}-${
+            const link = `/category/${valideURLConvert(s?.category[0]?.name)}_${
               s?.category[0]?._id
-            }_${valideURLConvert(s.name)}-${s._id}`;
+            }$${valideURLConvert(s.name)}_${s._id}`;
             return (
               <Link
                 href={link}

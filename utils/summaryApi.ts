@@ -1,4 +1,5 @@
-export const baseURL = "https://ecom-backend-3-0ne5.onrender.com"; 
+ export const baseURL = "https://ecom-backend-3-0ne5.onrender.com"; 
+// export const baseURL = "http://localhost:8000"; 
 interface ApiConfig {
   url: string;
   method: string;
