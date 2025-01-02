@@ -6,7 +6,7 @@ import AxiosToastError from "@/utils/AxiosToastError";
 import Loading from "@/components/custom/Loading";
 import CardProduct from "@/components/custom/CardProduct";
 import { useSelector } from "react-redux";
-import { valideURLConvert } from "@/utils/valideURLConvert";
+import { reverseURLConvert, valideURLConvert } from "@/utils/valideURLConvert";
 import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { RootState } from "@/store/store";
@@ -144,7 +144,9 @@ const ProductListPage = ({
         {/**Product **/}
         <div className="sticky top-20">
           <div className="bg-white shadow-md p-4 z-10">
-            <h3 className="font-semibold">{subCategoryName}</h3>
+            <h3 className="font-semibold">
+              {reverseURLConvert(subCategoryName)}
+            </h3>
           </div>
           <div>
             <div className="min-h-[80vh] max-h-[80vh] overflow-y-auto relative">
